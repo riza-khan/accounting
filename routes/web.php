@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ImportController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/users/imports', [ImportController::class, 'show']);
+Route::post('/users/imports', [ImportController::class, 'store']);
+
+Route::get('/users', [UserController::class, 'show']);
