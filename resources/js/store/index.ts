@@ -12,7 +12,12 @@ export default createStore({
 		getToken: (state: any): string => state.token,
 	},
 	mutations: {
-		logout() {},
+		setToken(state, token) {
+			state.token = token;
+		},
+		logout() {
+			Axios.post("/logout");
+		},
 	},
 	modules: {
 		...modules,

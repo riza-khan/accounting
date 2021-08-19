@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed } from "vue";
+import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
@@ -13,10 +13,6 @@ export default defineComponent({
 		const store = useStore();
 
 		const state = computed(() => store.getters["getLoading"]);
-
-		onMounted(() => {
-			console.log("foo bar");
-		});
 
 		return { state };
 	},

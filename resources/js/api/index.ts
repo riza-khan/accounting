@@ -3,14 +3,8 @@ import store from "../store";
 
 const Axios = axios.create({
 	baseURL: process.env.APP_URL,
+	headers: { Accept: "application/json" },
 });
-
-const addToken = (config: any) => {
-	const token = store.getters["getToken"];
-	if (token) {
-		config.headers.Authorization = `Bearer ${token}`;
-	}
-};
 
 Axios.interceptors.request.use(
 	(config) => {
@@ -27,3 +21,4 @@ Axios.interceptors.response.use(
 	},
 	(error) => Promise.reject(error)
 );
+export default Axios;
