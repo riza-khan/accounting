@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if(!Auth::guest()){
+    if (!Auth::guest()) {
         return redirect()->route('dashboard');
     }
     return view('welcome');
 });
 
-Route::get('/dashboard/{any?}', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard/{any?}', [DashboardController::class, 'index'])->where('any', '.*')->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
