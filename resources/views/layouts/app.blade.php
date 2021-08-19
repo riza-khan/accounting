@@ -17,6 +17,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
+        @guest
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -26,6 +27,7 @@
                     {{ $header }}
                 </div>
             </header>
+            @endguest
 
             <!-- Page Content -->
             <main>
