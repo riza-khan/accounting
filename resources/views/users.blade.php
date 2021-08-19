@@ -2,6 +2,6 @@
     Users page
 </h1>
 
-<pre>
-    {{ $users }}
-</pre>
+@foreach ($users as $user)
+<li>{{ $user->name }}</li>
+@endforeach
