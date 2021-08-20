@@ -19,4 +19,5 @@ a {
 	@extend a;
 	background: $red;
 	color: $white;
+	border: solid 1px $red;
 }

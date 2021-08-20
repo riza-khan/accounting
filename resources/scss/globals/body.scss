@@ -10,4 +10,13 @@
 
 body {
 	font-family: "Roboto", sans-serif;
+	padding: $medium;
+}
+
+form {
+	max-width: 300px;
+	margin: $medium 0;
+	display: flex;
+	grid-gap: $medium;
+	flex-direction: column;
 }
