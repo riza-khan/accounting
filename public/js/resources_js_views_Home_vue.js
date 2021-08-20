@@ -21,9 +21,6 @@ __webpack_require__.r(__webpack_exports__);
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return store.getters["getLoading"];
     });
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      console.log("foo bar");
-    });
     return {
       state: state
     };
