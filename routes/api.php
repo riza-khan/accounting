@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CarsController;
+use App\Http\Controllers\ImportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    // Users
-    Route::get('/stuff', function (Request $request) {
-        return 'Foo bar';
-    });
+    // Cars
+    Route::get('/cars', [CarsController::class, 'index']);
+    Route::post('/cars-import', [ImportController::class, 'cars']);
 });
