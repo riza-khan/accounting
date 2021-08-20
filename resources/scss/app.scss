@@ -1,9 +1,5 @@
-body {
-	border: solid 1px red;
-	color: red;
-}
+// Globals
+@use "./globals/body";
 
-h1 {
-	color: blue;
-	font-size: 5rem;
-}
+// Components
+@use "./components/button";

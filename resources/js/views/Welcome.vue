@@ -1,6 +1,6 @@
 <template>
 	<h1>Welcome page</h1>
-	<button @click="handleClick">Click me</button>
+	<button class="btn-success-sm" @click="handleClick">Click me</button>
 </template>
 
 <script lang="ts">

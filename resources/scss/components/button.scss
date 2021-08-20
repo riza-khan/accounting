@@ -1,0 +1,63 @@
+@import "../globals/variables";
+
+button {
+	border: 0;
+	background: $red;
+	padding: $padding-sm;
+	color: $white;
+	border-radius: $small;
+	transition: all 0.5s ease;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.btn-sm {
+	@extend button;
+	padding: $padding-sm;
+}
+
+.btn-md {
+	@extend button;
+	padding: $padding-md;
+}
+
+.btn-lg {
+	@extend button;
+	padding: $padding-lg;
+}
+
+.btn-success-sm {
+	@extend .btn-sm;
+	background: $green;
+
+	&:hover {
+		background: $pink;
+		color: $black;
+	}
+}
+
+.btn-danger-sm {
+	@extend .btn-sm;
+	background: $red;
+
+	&:hover {
+		background: $pink;
+		color: $black;
+	}
+}
+
+.btn-danger-lg {
+	@extend .btn-lg;
+	background: $red;
+
+	&:hover {
+		background: $pink;
+		color: $black;
+	}
+}
+
+.btn-secondary-sm {
+	@extend .btn-sm;
+}
