@@ -16,9 +16,11 @@
 <script lang="ts">
 import Axios from "../api";
 import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
 	setup() {
+		const router = useRouter();
 		const file = ref<string | Blob>("");
 
 		const handleFileAdded = (e: any) => {
@@ -39,6 +41,7 @@ export default defineComponent({
 					"Content-Type": "multipart/form-data",
 				},
 			});
+			router.push({ name: "Home" });
 		};
 
 		return { handleFileImport, handleFileAdded };

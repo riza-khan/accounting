@@ -1,5 +1,5 @@
 import axios from "axios";
-import store from "../store";
+// import store from "../store";
 
 const Axios = axios.create({
 	baseURL: process.env.APP_URL,
@@ -8,7 +8,7 @@ const Axios = axios.create({
 
 Axios.interceptors.request.use(
 	(config) => {
-		store.commit("setLoader", true);
+		// store.commit("setLoader", true);
 		return config;
 	},
 	(error) => Promise.reject(error)
@@ -16,7 +16,7 @@ Axios.interceptors.request.use(
 
 Axios.interceptors.response.use(
 	(response) => {
-		store.commit("setLoader", false);
+		// store.commit("setLoader", false);
 		return response;
 	},
 	(error) => Promise.reject(error)
