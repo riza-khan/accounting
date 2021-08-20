@@ -1,0 +1,9 @@
+@import "../globals/variables.scss";
+
+.navbar {
+	display: flex;
+	justify-content: center;
+	grid-gap: $medium;
+	padding: $medium;
+	width: 100%;
+}

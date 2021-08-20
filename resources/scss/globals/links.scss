@@ -1,0 +1,22 @@
+@import "../globals/variables.scss";
+
+a {
+	text-decoration: none;
+	color: $blue;
+	transition: all 0.5s ease;
+	border: solid 1px $blue;
+	padding: $small;
+	border-radius: $small;
+
+	&:hover {
+		background: $red;
+		color: $white;
+		border: solid 1px $red;
+	}
+}
+
+.router-link-exact-active {
+	@extend a;
+	background: $red;
+	color: $white;
+}

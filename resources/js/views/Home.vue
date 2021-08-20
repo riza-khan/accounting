@@ -1,20 +1,13 @@
 <template>
-	<h1>Home page</h1>
-	{{ state }}
-	<router-link :to="{ name: 'Welcome' }">Welcome page</router-link>
+	<h1>Home</h1>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
-import { useStore } from "vuex";
+import { defineComponent } from "vue";
 
 export default defineComponent({
 	setup() {
-		const store = useStore();
-
-		const state = computed(() => store.getters["getLoading"]);
-
-		return { state };
+		return {};
 	},
 });
 </script>
