@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24987cafd2e78cab3f856d708ed5dba9",
+    "content-hash": "34f0d9729c88e921f89bc8c422b94123",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3024,16 +3024,16 @@
         },
         {
             "name": "quickbooks/v3-php-sdk",
-            "version": "5.4.7",
+            "version": "6.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/intuit/QuickBooks-V3-PHP-SDK.git",
-                "reference": "f2116e24a67971bcdb53cc1f56574e57b1a403f2"
+                "reference": "036e8f1de4c9d6fd17474694e5de61313e231872"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/intuit/QuickBooks-V3-PHP-SDK/zipball/f2116e24a67971bcdb53cc1f56574e57b1a403f2",
-                "reference": "f2116e24a67971bcdb53cc1f56574e57b1a403f2",
+                "url": "https://api.github.com/repos/intuit/QuickBooks-V3-PHP-SDK/zipball/036e8f1de4c9d6fd17474694e5de61313e231872",
+                "reference": "036e8f1de4c9d6fd17474694e5de61313e231872",
                 "shasum": ""
             },
             "require": {
@@ -3075,9 +3075,9 @@
             ],
             "support": {
                 "issues": "https://github.com/intuit/QuickBooks-V3-PHP-SDK/issues",
-                "source": "https://github.com/intuit/QuickBooks-V3-PHP-SDK/tree/5.4.7"
+                "source": "https://github.com/intuit/QuickBooks-V3-PHP-SDK/tree/6.0.2"
             },
-            "time": "2021-02-09T02:18:32+00:00"
+            "time": "2021-08-18T17:42:47+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -3298,71 +3298,6 @@
                 }
             ],
             "time": "2021-08-11T01:06:55+00:00"
-        },
-        {
-            "name": "spinen/laravel-quickbooks-client",
-            "version": "4.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spinen/laravel-quickbooks-client.git",
-                "reference": "d378eb3bd9e6c4bf1467bdf1317f3d52491ee789"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spinen/laravel-quickbooks-client/zipball/d378eb3bd9e6c4bf1467bdf1317f3d52491ee789",
-                "reference": "d378eb3bd9e6c4bf1467bdf1317f3d52491ee789",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "~5.5|~6|~7|~8",
-                "illuminate/http": "~5.5|~6|~7|~8",
-                "illuminate/routing": "~5.5|~6|~7|~8",
-                "nesbot/carbon": "^1.26.3|^2.0",
-                "php": ">=7.2",
-                "quickbooks/v3-php-sdk": "^5.3.6"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.3.1",
-                "phpunit/phpunit": "^8.4|^9.0",
-                "psy/psysh": "^0.10",
-                "symfony/thanks": "^1.1"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Spinen\\QuickBooks\\Providers\\ServiceProvider",
-                        "Spinen\\QuickBooks\\Providers\\ClientServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Spinen\\QuickBooks\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jimmy Puckett",
-                    "email": "jimmy.puckett@spinen.com"
-                }
-            ],
-            "description": "SPINEN's Laravel Client for QuickBooks.",
-            "keywords": [
-                "client",
-                "laravel",
-                "quickbooks",
-                "spinen"
-            ],
-            "support": {
-                "issues": "https://github.com/spinen/laravel-quickbooks-client/issues",
-                "source": "https://github.com/spinen/laravel-quickbooks-client/tree/4.0.4"
-            },
-            "time": "2020-09-15T18:30:27+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
