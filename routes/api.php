@@ -25,4 +25,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/cars-import', [ImportController::class, 'cars']);
 
     Route::get('/quickbooks/connect', [QuickBooksAPIController::class, 'index']);
+    Route::post('/quickbooks/connect', [QuickBooksAPIController::class, 'getAuthorizationTokens']);
 });
