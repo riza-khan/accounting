@@ -9,7 +9,6 @@
 			{{ page }}
 		</div>
 	</div>
-	<pre>{{ meta }}</pre>
 </template>
 
 <script lang="ts">
@@ -29,7 +28,6 @@ export default defineComponent({
 		);
 		return { numOfPages, emit };
 	},
-	emits: ["select-page"],
 });
 </script>
 
