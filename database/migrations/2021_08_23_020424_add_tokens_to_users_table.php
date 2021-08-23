@@ -14,12 +14,12 @@ class AddTokensToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('access_token_key')->nullable();
-            $table->string('access_token_secret')->nullable();
+            $table->longText('access_token_key')->nullable();
+            $table->longText('access_token_secret')->nullable();
         });
     }
 
-    /**
+    /*->nullable();*
      * Reverse the migrations.
      *
      * @return void

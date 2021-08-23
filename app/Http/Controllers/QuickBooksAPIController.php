@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use QuickBooksOnline\API\DataService\DataService;
 
 class QuickBooksAPIController extends Controller
@@ -43,6 +45,11 @@ class QuickBooksAPIController extends Controller
 
         $OAuth2LoginHelper = $dataService->getOAuth2LoginHelper();
         $accessToken = $OAuth2LoginHelper->exchangeAuthorizationCodeForToken($code, $realmId);
+
+        User::where('id', Auth::user()->id)->update([
+            'access_token_key' => $accessToken->getAccessToken(),
+            'access_token_secret' => $accessToken->getRefreshToken(),
+        ]);
 
         if (!$accessToken) {
             return response(['Server Error'], 500);
