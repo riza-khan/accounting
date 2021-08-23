@@ -30,6 +30,7 @@ class QuickBooksAPIController extends Controller
     {
         $code = $request->input('code');
         $realmId = $request->input('realmId');
+
         $dataService = DataService::Configure(array(
             'auth_mode'         => env('QUICKBOOKS_AUTH_MODE'),
             'ClientID'          => env('QUICKBOOKS_CLIENT_ID'),
@@ -39,13 +40,14 @@ class QuickBooksAPIController extends Controller
             'QBORealmID'        => $realmId,
             'baseUrl'           => "development"
         ));
+
         $OAuth2LoginHelper = $dataService->getOAuth2LoginHelper();
         $accessToken = $OAuth2LoginHelper->exchangeAuthorizationCodeForToken($code, $realmId);
 
-        if ($accessToken) {
-            return response(['Access Token Saved', 200]);
+        if (!$accessToken) {
+            return response(['Server Error'], 500);
         }
 
-        return response(['Server Error'], 500);
+        return response(['Tokens saved to database'], 200);
     }
 }
