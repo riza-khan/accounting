@@ -22,11 +22,12 @@
 import Paginator from "../components/molecules/Paginator.vue";
 import { defineComponent, onMounted, ref, reactive, watchEffect } from "vue";
 import Axios from "../api";
+import QBAxios from "../qb-api";
 
 export default defineComponent({
 	components: { Paginator },
 	setup() {
-		const cars = ref([]);
+		const companies = ref([]);
 		const meta = reactive({
 			current_page: 1,
 			per_page: 15,
@@ -36,7 +37,7 @@ export default defineComponent({
 		const getData = (model: string, params?: string) => {
 			Axios.get(`/api/${model}${params ?? ""}`).then(({ data }) => {
 				const { per_page, total } = data;
-				cars.value = data.data;
+				companies.value = data.data;
 				meta.per_page = per_page;
 				meta.total = total;
 			});
@@ -49,14 +50,14 @@ export default defineComponent({
 
 			const params = "?" + "page=" + meta.current_page;
 
-			getData("cars", params);
+			getData("companies", params);
 		});
 
 		onMounted(() => {
-			getData("cars");
+			getData("companies");
 		});
 
-		return { cars, meta };
+		return { companies, meta };
 	},
 });
 </script>

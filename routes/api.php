@@ -28,7 +28,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // Companies
     Route::prefix('/companies')->group(function () {
         Route::get('', [CompaniesController::class, 'index']);
-        Route::post('/connect', [CompaniesController::class, 'create']);
     });
 
     Route::prefix('/quickbooks')->group(function () {
