@@ -35,6 +35,19 @@ form {
   margin-bottom: 10px;
 }
 
+.paginator {
+  margin: 15px 0;
+  justify-content: center;
+  display: flex;
+  grid-gap: 10px;
+}
+.paginator:hover {
+  cursor: pointer;
+}
+.paginator--current_page {
+  color: #e94f37;
+}
+
 a, .router-link-exact-active {
   text-decoration: none;
   color: #4e4187;
