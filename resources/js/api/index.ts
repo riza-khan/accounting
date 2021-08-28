@@ -2,7 +2,7 @@ import axios from "axios";
 // import store from "../store";
 
 const Axios = axios.create({
-	baseURL: process.env.APP_URL,
+	baseURL: process.env.API_URL,
 	headers: { Accept: "application/json" },
 });
 

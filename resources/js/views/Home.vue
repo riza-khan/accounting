@@ -1,28 +1,16 @@
 <template>
-	<div class="table">
-		<div class="table__headers">
-			<h3>Realm</h3>
-			<h3>Name</h3>
-		</div>
-		<div
-			class="table__contents"
-			v-for="company in companies"
-			:key="company.id"
-		>
-			<p>{{ company.realm }}</p>
-			<button @click="handleQBConnect(company.realm)">
-				{{ company.name }}
-			</button>
-		</div>
+	<div v-if="targetRealm">{{ targetRealm }}</div>
+	<div v-else>
+		<p>No realm selected, please connect using the above function</p>
 	</div>
-	<Paginator v-model:meta="meta" />
+
+	<button @click="getInfo">Get Info</button>
 </template>
 
 <script lang="ts">
 import Paginator from "../components/molecules/Paginator.vue";
 import { defineComponent, onMounted, ref, reactive, watchEffect } from "vue";
 import Axios from "../api";
-import QBAxios from "../qb-api";
 
 export default defineComponent({
 	components: { Paginator },
@@ -44,20 +32,21 @@ export default defineComponent({
 		};
 
 		watchEffect(() => {
-			/* const params = Object.entries(meta).reduce((accum, cv) => { */
-			/* 	return accum.concat(cv[0] + "=" + cv[1]); */
-			/* }, "?"); */
-
 			const params = "?" + "page=" + meta.current_page;
-
 			getData("companies", params);
 		});
+
+		const getInfo = () => {
+			Axios.get("/api/quickbooks/company")
+				.then((res) => console.log(res))
+				.catch((e) => console.log(e));
+		};
 
 		onMounted(() => {
 			getData("companies");
 		});
 
-		return { companies, meta };
+		return { companies, meta, getInfo };
 	},
 });
 </script>
