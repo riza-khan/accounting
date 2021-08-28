@@ -1,14 +1,18 @@
 <template>
 	<div class="table">
 		<div class="table__headers">
-			<h3>Make</h3>
-			<h3>Model</h3>
-			<h3>Year</h3>
+			<h3>Realm</h3>
+			<h3>Name</h3>
 		</div>
-		<div class="table__contents" v-for="car in cars" :key="car.id">
-			<p>{{ car.make }}</p>
-			<p>{{ car.model }}</p>
-			<p>{{ car.year }}</p>
+		<div
+			class="table__contents"
+			v-for="company in companies"
+			:key="company.id"
+		>
+			<p>{{ company.realm }}</p>
+			<button @click="handleQBConnect(company.realm)">
+				{{ company.name }}
+			</button>
 		</div>
 	</div>
 	<Paginator v-model:meta="meta" />

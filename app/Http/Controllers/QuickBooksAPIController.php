@@ -55,6 +55,6 @@ class QuickBooksAPIController extends Controller
             return response(['Server Error'], 500);
         }
 
-        return response(['Tokens saved to database'], 200);
+        return response(['user' => Auth::user()], 200);
     }
 }
