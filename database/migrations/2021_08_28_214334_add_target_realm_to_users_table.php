@@ -14,7 +14,7 @@ class AddTargetRealmToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('target-realm')->nullable();
+            $table->string('target_realm')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddTargetRealmToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('target-realm');
+            $table->dropColumn('target_realm');
         });
     }
 }
