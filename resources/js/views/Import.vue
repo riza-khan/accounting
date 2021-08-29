@@ -36,7 +36,7 @@ export default defineComponent({
 		const handleFileImport = (e: HTMLFormElement) => {
 			const formData = new FormData();
 			formData.append("file", file.value);
-			Axios.post("/api/cars-import", formData, {
+			Axios.post("/api/invoice-import", formData, {
 				headers: {
 					"Content-Type": "multipart/form-data",
 				},

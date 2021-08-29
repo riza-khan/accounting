@@ -25,6 +25,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/cars', [CarsController::class, 'index']);
     Route::post('/cars-import', [ImportController::class, 'cars']);
 
+    // Invoices
+    Route::get('/invoices', [CarsController::class, 'index']);
+    Route::post('/invoice-import', [ImportController::class, 'invoices']);
+
     // Companies
     Route::prefix('/companies')->group(function () {
         Route::get('', [CompaniesController::class, 'index']);
