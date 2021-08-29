@@ -10,6 +10,7 @@
 	</div>
 
 	<button @click="getInfo">Get Info</button>
+	<button @click="batchUploadInvoices">Batch Upload Invoices</button>
 </template>
 
 <script lang="ts">
@@ -34,7 +35,13 @@ export default defineComponent({
 				.catch((e) => console.log(e));
 		};
 
-		return { company, invoices, getInfo };
+		const batchUploadInvoices = () => {
+			Axios.get("/api/quickbooks/batch-invoices")
+				.then((res) => console.log(res))
+				.catch((e) => console.log(e));
+		};
+
+		return { company, invoices, getInfo, batchUploadInvoices };
 	},
 });
 </script>
