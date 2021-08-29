@@ -26,7 +26,6 @@ export default defineComponent({
 		const getInfo = () => {
 			Axios.get("/api/quickbooks/company")
 				.then(({ data }) => {
-					console.log(data);
 					company.value = data.company;
 					invoices.value = data.invoices.map(({ TotalAmt }: any) => ({
 						TotalAmt,
