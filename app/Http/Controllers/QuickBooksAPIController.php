@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use QuickBooksOnline\API\Core\Http\Serialization\XmlObjectSerializer;
+use QuickBooksOnline\API\Facades\Invoice;
 use QuickBooksOnline\API\DataService\DataService;
 
 class QuickBooksAPIController extends Controller
@@ -82,5 +81,50 @@ class QuickBooksAPIController extends Controller
             'company'  => $companyData,
             'invoices' => $allInvoices
         ], 200);
+    }
+
+    public function batchInvoices()
+    {
+        $dataService = DataService::Configure(array(
+            'auth_mode'       => 'oauth2',
+            'ClientID'        => env('QUICKBOOKS_CLIENT_ID'),
+            'ClientSecret'    => env('QUICKBOOKS_CLIENT_SECRET'),
+            'accessTokenKey'  => Auth::user()->access_token_key,
+            'refreshTokenKey' => Auth::user()->acces_token_secret,
+            'QBORealmID'      => Auth::user()->target_realm,
+            'baseUrl'         => "Development"
+        ));
+
+        $batch = $dataService->CreateNewBatch();
+
+        $invoices = \App\Models\Invoice::all()->take(30);
+
+        foreach($invoices as $invoice) {
+            $newInvoice = Invoice::create([
+                "Line" => [
+                    [
+                        "Amount" => $invoice->amount,
+                        "DetailType" => "SalesItemLineDetail",
+                        "SalesItemLineDetail" => [
+                            "ItemRef" => [
+                                "value" => 1,
+                                "name" => "Services"
+                            ]
+                        ]
+                    ]
+                ],
+                "CustomerRef" => [
+                    "value" => 1
+                ]
+            ]);
+            $batch->AddEntity($newInvoice, $invoice->invoice_number, "Create");
+        }
+
+        // Run a batch
+        $batch->Execute();
+        $error = $batch->getLastError();
+        if ($error) {
+            return response(['error' => $error], 500);
+        }
     }
 }
