@@ -38,5 +38,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/connect', [QuickBooksAPIController::class, 'index']);
         Route::post('/connect', [QuickBooksAPIController::class, 'getAuthorizationTokens']);
         Route::get('/company', [QuickBooksAPIController::class, 'getInfo']);
+        Route::get('/batch-invoices', [QuickBooksAPIController::class, 'batchInvoices']);
     });
 });
