@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import Axios from "../api";
-// import modules from "./modules";
+import modules from "./modules";
 
 export default createStore({
 	state: {
@@ -19,7 +19,7 @@ export default createStore({
 			Axios.post("/logout");
 		},
 	},
-	// modules: {
-	// 	...modules,
-	// },
+	modules: {
+		...modules,
+	},
 });
