@@ -3,4 +3,5 @@ class Company {
 		this.data = data;
 	}
 }
+
 export default Company;
