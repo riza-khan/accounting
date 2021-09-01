@@ -1,6 +1,5 @@
 import Company from "./models/Company.ts";
 
-
 const state = () => ({
 	company: {},
 });
