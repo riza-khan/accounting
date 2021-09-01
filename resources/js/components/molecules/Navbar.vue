@@ -15,8 +15,7 @@ export default defineComponent({
 		const handleQBConnect = () => {
 			Axios.get("/api/quickbooks/connect")
 				.then(({ data }) => {
-					console.log(data);
-					window.open(data);
+					window.location = data;
 				})
 				.catch((e) => console.log(e));
 		};
