@@ -1,5 +1,4 @@
 <template>
-	<h2>Import File:</h2>
 	<form action="/" @submit.prevent="handleFileImport">
 		<label for="file">Choose an Excel File</label>
 		<input
