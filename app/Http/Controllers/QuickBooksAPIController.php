@@ -75,11 +75,9 @@ class QuickBooksAPIController extends Controller
         $dataService->throwExceptionOnError(true);
 
         $companyData = $dataService->getCompanyInfo();
-        $allInvoices = $dataService->Query("SELECT * FROM Invoice");
 
         return response([
             'company'  => $companyData,
-            'invoices' => $allInvoices
         ], 200);
     }
 

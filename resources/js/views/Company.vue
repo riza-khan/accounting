@@ -1,21 +1,19 @@
 <template>
+	<Navbar />
 	<h1>Company in question</h1>
-
 	<button @click="batchUploadInvoices">Batch Upload Invoices</button>
-
 	<h1>Company</h1>
 	<pre>{{ company }}</pre>
-
-	<h1>Invoices</h1>
-	<pre>{{ invoices }}</pre>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
+import Navbar from "../components/molecules/Navbar.vue";
 import Axios from "../api";
 
 export default defineComponent({
 	name: "Company",
+	components: { Navbar },
 	setup() {
 		const company = ref({});
 		const invoices = ref([]);
