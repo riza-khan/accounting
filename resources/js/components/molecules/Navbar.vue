@@ -1,6 +1,5 @@
 <template>
 	<div class="navbar">
-		<router-link :to="{ name: 'Random' }">Random</router-link>
 		<router-link :to="{ name: 'Confirm' }">Confirm</router-link>
 		<router-link :to="{ name: 'Company' }">Company</router-link>
 		<router-link :to="{ name: 'Import' }"
