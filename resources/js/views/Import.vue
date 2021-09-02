@@ -41,7 +41,7 @@ export default defineComponent({
 					"Content-Type": "multipart/form-data",
 				},
 			});
-			router.push({ name: "Home" });
+			router.push({ name: "Dashboard" });
 		};
 
 		return { handleFileImport, handleFileAdded };

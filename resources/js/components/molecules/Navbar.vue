@@ -1,7 +1,11 @@
 <template>
 	<div class="navbar">
-		<router-link :to="{ name: 'Home' }">Dashboard</router-link>
-		<router-link :to="{ name: 'Import' }">Import Excel File</router-link>
+		<router-link :to="{ name: 'Random' }">Random</router-link>
+		<router-link :to="{ name: 'Confirm' }">Confirm</router-link>
+		<router-link :to="{ name: 'Company' }">Company</router-link>
+		<router-link :to="{ name: 'Import' }"
+			>Import Excel File to move</router-link
+		>
 		<button @click="handleQBConnect">Connect To QuickBooks</button>
 	</div>
 </template>
@@ -19,6 +23,7 @@ export default defineComponent({
 				})
 				.catch((e) => console.log(e));
 		};
+
 		return { handleQBConnect };
 	},
 });

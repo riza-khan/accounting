@@ -1,26 +1,26 @@
 <template>
-	<button @click="handleConfirm">Confirm</button>
+	<h1>Confirm!</h1>
 </template>
 
 <script lang="ts">
-import Axios from "../api";
 import { defineComponent } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import Axios from "../api";
 
 export default defineComponent({
-	setup() {
-		const route = useRoute();
-		const router = useRouter();
-
-		const handleConfirm = () => {
+	name: "Confirm",
+	beforeRouteEnter(to, from, next) {
+		const { code, realmId } = to.query;
+		if (code && realmId) {
 			Axios.post("/api/quickbooks/connect", {
-				...route.query,
+				code,
+				realmId,
 			})
-				.then(() => router.push({ name: "Home" }))
+				.then(() => next({ name: "Company" }))
 				.then((e: any) => console.log(e));
-		};
-
-		return { handleConfirm };
+		}
+	},
+	setup() {
+		return {};
 	},
 });
 </script>

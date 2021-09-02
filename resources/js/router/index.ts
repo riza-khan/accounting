@@ -3,18 +3,25 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: "/dashboard",
-		name: "Home",
-		component: () => import("../views/Home.vue"),
-	},
-	{
-		path: "/dashboard/import",
-		name: "Import",
-		component: () => import("../views/Import.vue"),
-	},
-	{
-		path: "/dashboard/confirm",
-		name: "Confirm",
-		component: () => import("../views/Confirm.vue"),
+		name: "Dashboard",
+		component: () => import("../views/Dashboard.vue"),
+		children: [
+			{
+				path: "confirm",
+				name: "Confirm",
+				component: () => import("../views/Confirm.vue"),
+			},
+			{
+				path: "company",
+				name: "Company",
+				component: () => import("../views/Company.vue"),
+			},
+			{
+				path: "import",
+				name: "Import",
+				component: () => import("../views/Import.vue"),
+			},
+		],
 	},
 ];
 

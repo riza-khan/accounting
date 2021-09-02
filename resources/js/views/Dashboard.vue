@@ -1,16 +1,5 @@
 <template>
-	<div v-if="company && invoices.length">
-		<h1>Company</h1>
-		<pre>{{ company }}</pre>
-		<h1>Invoices</h1>
-		<pre>{{ invoices }}</pre>
-	</div>
-	<div v-else>
-		<p>No realm selected, please connect using the above function</p>
-	</div>
-
-	<button @click="getInfo">Get Info</button>
-	<button @click="batchUploadInvoices">Batch Upload Invoices</button>
+	<router-view />
 </template>
 
 <script lang="ts">
@@ -19,6 +8,7 @@ import { defineComponent, ref } from "vue";
 import Axios from "../api";
 
 export default defineComponent({
+	name: "Home",
 	components: { Paginator },
 	setup() {
 		const company = ref({});
@@ -41,7 +31,12 @@ export default defineComponent({
 				.catch((e) => console.log(e));
 		};
 
-		return { company, invoices, getInfo, batchUploadInvoices };
+		return {
+			company,
+			invoices,
+			getInfo,
+			batchUploadInvoices,
+		};
 	},
 });
 </script>
