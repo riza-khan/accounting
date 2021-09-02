@@ -1,9 +1,9 @@
 <template>
 	<div class="navbar">
-		<router-link :to="{ name: 'Confirm' }">Confirm</router-link>
-		<router-link :to="{ name: 'Import' }"
-			>Import Excel File to move</router-link
-		>
+		<div class="navbar__links">
+			<router-link :to="{ name: 'Information' }">Information</router-link>
+			<router-link :to="{ name: 'Import' }">Import Documents</router-link>
+		</div>
 		<button @click="changeCompany">Change Company</button>
 	</div>
 </template>

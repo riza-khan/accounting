@@ -5,6 +5,10 @@
 	width: 100%;
 	justify-content: space-between;
 	grid-gap: $medium;
-	padding: $medium;
 	width: 100%;
+
+	&__links {
+		display: flex;
+		grid-gap: 5px;
+	}
 }

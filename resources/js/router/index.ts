@@ -15,11 +15,19 @@ const routes: Array<RouteRecordRaw> = [
 				path: "company",
 				name: "Company",
 				component: () => import("../views/Company.vue"),
-			},
-			{
-				path: "import",
-				name: "Import",
-				component: () => import("../views/Import.vue"),
+				redirect: { name: "Information" },
+				children: [
+					{
+						path: "information",
+						name: "Information",
+						component: () => import("../views/Information.vue"),
+					},
+					{
+						path: "import",
+						name: "Import",
+						component: () => import("../views/Import.vue"),
+					},
+				],
 			},
 		],
 	},
