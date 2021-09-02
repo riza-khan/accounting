@@ -1,32 +1,47 @@
 <template>
-	<h1>Home</h1>
-	<div class="table">
-		<div class="table__headers">
-			<h3>Make</h3>
-			<h3>Model</h3>
-			<h3>Year</h3>
-		</div>
-		<div class="table__contents" v-for="car in cars" :key="car.id">
-			<p>{{ car.make }}</p>
-			<p>{{ car.model }}</p>
-			<p>{{ car.year }}</p>
-		</div>
+	<div v-if="company && invoices.length">
+		<h1>Company</h1>
+		<pre>{{ company }}</pre>
+		<h1>Invoices</h1>
+		<pre>{{ invoices }}</pre>
 	</div>
+	<div v-else>
+		<p>No realm selected, please connect using the above function</p>
+	</div>
+
+	<button @click="getInfo">Get Info</button>
+	<button @click="batchUploadInvoices">Batch Upload Invoices</button>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import Paginator from "../components/molecules/Paginator.vue";
+import { defineComponent, ref } from "vue";
 import Axios from "../api";
 
 export default defineComponent({
+	components: { Paginator },
 	setup() {
-		const cars = ref([]);
+		const company = ref({});
+		const invoices = ref([]);
 
-		onMounted(() => {
-			Axios.get("/api/cars").then(({ data }) => (cars.value = data));
-		});
+		const getInfo = () => {
+			Axios.get("/api/quickbooks/company")
+				.then(({ data }) => {
+					company.value = data.company;
+					invoices.value = data.invoices.map(({ TotalAmt }: any) => ({
+						TotalAmt,
+					}));
+				})
+				.catch((e) => console.log(e));
+		};
 
-		return { cars };
+		const batchUploadInvoices = () => {
+			Axios.get("/api/quickbooks/batch-invoices")
+				.then((res) => console.log(res))
+				.catch((e) => console.log(e));
+		};
+
+		return { company, invoices, getInfo, batchUploadInvoices };
 	},
 });
 </script>

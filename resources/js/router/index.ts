@@ -11,6 +11,11 @@ const routes: Array<RouteRecordRaw> = [
 		name: "Import",
 		component: () => import("../views/Import.vue"),
 	},
+	{
+		path: "/dashboard/confirm",
+		name: "Confirm",
+		component: () => import("../views/Confirm.vue"),
+	},
 ];
 
 const router = createRouter({

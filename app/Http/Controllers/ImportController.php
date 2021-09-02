@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\CarsImport;
+use App\Imports\InvoiceImport;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -28,6 +29,14 @@ class ImportController extends Controller
         $file = $request->file('file')->store('import');
 
         (new CarsImport)->import($file);
+        return response('File successfully imported', 200);
+    }
+
+    public function invoices(Request $request):Response
+    {
+        $file = $request->file('file')->store('import');
+
+        (new InvoiceImport)->import($file);
         return response('File successfully imported', 200);
     }
 
