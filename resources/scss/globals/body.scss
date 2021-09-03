@@ -11,6 +11,12 @@
 body {
 	font-family: "Roboto", sans-serif;
 	padding: $medium;
+	min-height: 100vh;
+
+	#app {
+		height: 100%;
+		position: relative;
+	}
 }
 
 form {

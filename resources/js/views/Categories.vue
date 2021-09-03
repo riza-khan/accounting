@@ -112,7 +112,7 @@ export default defineComponent({
 			});
 		};
 
-		const handleCategoryChange = (callback?: any) => {
+		const handleCategoryChange = () => {
 			Axios.post(`/api/categories/${category.value}`, {
 				currentPage: +currentPage.value,
 				perPage: +perPage.value,
@@ -133,10 +133,6 @@ export default defineComponent({
 					results.value = [];
 					console.log(e);
 				});
-
-			if (callback) {
-				callback();
-			}
 		};
 
 		// Mounted
@@ -144,9 +140,8 @@ export default defineComponent({
 			store.dispatch("getCategories");
 		});
 
-		watch([total, currentPage, perPage], () =>
-			handleCategoryChange(setTableContents)
-		);
+		watch([total, currentPage, perPage], () => handleCategoryChange());
+		watch([results], () => setTableContents());
 
 		return {
 			categories,
