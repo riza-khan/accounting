@@ -45,6 +45,12 @@
 					class="data-container__details--headers"
 					:style="tableStyle"
 				>
+					<div class="empty">
+						<input
+							type="checkbox"
+							@input="selectAll($event.target.checked)"
+						/>
+					</div>
 					<div v-for="header in tableHeaders" :key="header">
 						{{ header }}
 					</div>
@@ -55,6 +61,12 @@
 					class="data-container__details--content"
 					:style="tableStyle"
 				>
+					<div>
+						<input
+							type="checkbox"
+							@input="selectItem($event.target.checked, item)"
+						/>
+					</div>
 					<div v-for="header in tableHeaders" :key="header">
 						{{ item[header] }}
 					</div>
@@ -83,7 +95,7 @@ export default defineComponent({
 		const tableContents = ref([]);
 		const tableStyle = computed(
 			() =>
-				`grid-template-columns: repeat(${tableHeaders.value.length}, 1fr)`
+				`grid-template-columns: 50px repeat(${tableHeaders.value.length}, 1fr)`
 		);
 
 		// Pagination
@@ -110,6 +122,14 @@ export default defineComponent({
 
 				return obj;
 			});
+		};
+
+		const selectAll = (state: any) => {
+			console.log(state);
+		};
+
+		const selectItem = (state: boolean, item: any) => {
+			console.log(state, item);
 		};
 
 		const handleCategoryChange = () => {
@@ -158,6 +178,8 @@ export default defineComponent({
 			perPage,
 			updatePerPage,
 			updateCurrentPage,
+			selectAll,
+			selectItem,
 		};
 	},
 });

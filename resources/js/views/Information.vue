@@ -1,5 +1,4 @@
 <template>
-	<h1>Company</h1>
 	<pre>{{ company }}</pre>
 </template>
 

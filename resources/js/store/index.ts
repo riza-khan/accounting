@@ -13,6 +13,7 @@ export default createStore({
 		getLoading: (state: any): boolean => state.loading,
 		getToken: (state: any): string => state.token,
 		getCompany: (state: any): any => state.company,
+		getCompanyName: (state: any): any => state.company.CompanyName,
 		getCategories: (state: any): any => state.categories,
 		getLoader: (state: any): any => state.loader,
 	},
