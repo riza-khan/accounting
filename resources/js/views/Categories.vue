@@ -13,7 +13,7 @@
 			</option>
 		</select>
 
-		<div class="data-container">
+		<div class="data-container" v-if="results.length">
 			<div class="data-container__headers">
 				<select
 					id="headers"
