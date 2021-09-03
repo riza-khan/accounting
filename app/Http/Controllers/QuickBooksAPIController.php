@@ -140,10 +140,12 @@ class QuickBooksAPIController extends Controller
 
         $dataService->setLogLocation("../../../storage/logs/quickbooks.log");
         $dataService->throwExceptionOnError(true);
-        $allOfCategory = $dataService->Query("SELECT * FROM " . $request);
+        $allOfCategory = $dataService->Query("SELECT * FROM " . $request->category);
+        $countOfCategory = $dataService->Query("SELECT COUNT(*) FROM " . $request->category);
 
         return response([
             $request  => $allOfCategory,
+            "count" => $countOfCategory,
         ], 200);
 
     }
