@@ -16,32 +16,32 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         Category::create([
-            'category' => 'Invoice',
+            'name' => 'Invoice',
             'description' => 'Add invoice'
         ]);
 
         Category::create([
-            'category' => 'Receipt',
+            'name' => 'Receipt',
             'description' => 'Add receipt'
         ]);
 
         Category::create([
-            'category' => 'Supplier',
+            'name' => 'Supplier',
             'description' => 'Add supplier'
         ]);
 
         Category::create([
-            'category' => 'Expense',
+            'name' => 'Expense',
             'description' => 'Add expense'
         ]);
 
         Category::create([
-            'category' => 'Bill',
+            'name' => 'Bill',
             'description' => 'Add bill'
         ]);
 
         Category::create([
-            'category' => 'Customer',
+            'name' => 'Customer',
             'description' => 'Add customer'
         ]);
     }

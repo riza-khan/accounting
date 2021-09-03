@@ -1,5 +1,4 @@
 <template>
-	<h1>Information about the company</h1>
 	<h1>Company</h1>
 	<pre>{{ company }}</pre>
 </template>

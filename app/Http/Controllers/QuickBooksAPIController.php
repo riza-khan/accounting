@@ -97,7 +97,7 @@ class QuickBooksAPIController extends Controller
 
         $invoices = \App\Models\Invoice::all()->take(30);
 
-        foreach($invoices as $invoice) {
+        foreach ($invoices as $invoice) {
             $newInvoice = Invoice::create([
                 "Line" => [
                     [
@@ -124,5 +124,30 @@ class QuickBooksAPIController extends Controller
         if ($error) {
             return response(['error' => $error], 500);
         }
+    }
+
+    public function getAllByCategory($request)
+    {
+        $dataService = DataService::Configure(array(
+            'auth_mode'       => 'oauth2',
+            'ClientID'        => env('QUICKBOOKS_CLIENT_ID'),
+            'ClientSecret'    => env('QUICKBOOKS_CLIENT_SECRET'),
+            'accessTokenKey'  => Auth::user()->access_token_key,
+            'refreshTokenKey' => Auth::user()->acces_token_secret,
+            'QBORealmID'      => Auth::user()->target_realm,
+            'baseUrl'         => "Development"
+        ));
+
+        $dataService->setLogLocation("../../../storage/logs/quickbooks.log");
+        $dataService->throwExceptionOnError(true);
+        $allOfCategory = $dataService->Query("SELECT * FROM " . $request);
+
+        return response([
+            $request  => $allOfCategory,
+        ], 200);
+
+
+
+
     }
 }

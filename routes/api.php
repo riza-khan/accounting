@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CarsController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\QuickBooksAPIController;
@@ -32,6 +33,12 @@ Route::middleware('auth:sanctum')->group(function () {
     // Companies
     Route::prefix('/companies')->group(function () {
         Route::get('', [CompaniesController::class, 'index']);
+    });
+
+    // Companies
+    Route::prefix('/categories')->group(function () {
+        Route::get('', [CategoriesController::class, 'index']);
+        Route::get('/{category}', [QuickBooksAPIController::class, 'getAllByCategory']);
     });
 
     Route::prefix('/quickbooks')->group(function () {

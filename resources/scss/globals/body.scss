@@ -54,3 +54,26 @@ form {
 		color: $red;
 	}
 }
+
+.data-container {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: 200px 1fr;
+
+	&__details {
+		display: grid;
+
+		&--headers {
+			display: grid;
+			grid-gap: 10px;
+			font-weight: bold;
+			border-bottom: solid 1px red;
+			margin-bottom: 1rem;
+		}
+
+		&--content {
+			display: grid;
+			grid-gap: 10px;
+		}
+	}
+}
