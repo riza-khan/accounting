@@ -34,6 +34,13 @@
 			</div>
 
 			<div class="data-container__details">
+				<Paginator
+					:total="total"
+					:perPage="perPage"
+					:currentPage="currentPage"
+					@changeCurrentPage="updateCurrentPage"
+					@changePerPage="updatePerPage"
+				/>
 				<div
 					class="data-container__details--headers"
 					:style="tableStyle"
@@ -58,12 +65,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed, ref } from "vue";
+import { defineComponent, onMounted, computed, ref, watch } from "vue";
 import Axios from "../api";
+import Paginator from "../components/molecules/Paginator.vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
 	name: "Categories",
+	components: { Paginator },
 	setup() {
 		const store = useStore();
 		const category = ref("");
@@ -76,10 +85,22 @@ export default defineComponent({
 			() =>
 				`grid-template-columns: repeat(${tableHeaders.value.length}, 1fr)`
 		);
-		onMounted(() => {
-			store.dispatch("getCategories");
-		});
 
+		// Pagination
+		const total = ref(0);
+		const currentPage = ref(1);
+		const perPage = ref(10);
+
+		const updateCurrentPage = (page: number) => {
+			currentPage.value = page;
+		};
+
+		const updatePerPage = (by: number) => {
+			console.log(by);
+			perPage.value = by;
+		};
+
+		// Table of Contents
 		const setTableContents = () => {
 			tableContents.value = results.value.map((result) => {
 				const obj = {};
@@ -91,10 +112,14 @@ export default defineComponent({
 			});
 		};
 
-		const handleCategoryChange = () => {
-			Axios.get(`/api/categories/${category.value}`)
+		const handleCategoryChange = (callback?: any) => {
+			Axios.post(`/api/categories/${category.value}`, {
+				currentPage: +currentPage.value,
+				perPage: +perPage.value,
+			})
 				.then((response: any) => {
 					const data = response.data[category.value];
+					total.value = response.data.count;
 					headers.value = Object.keys(data[0])
 						.map((key) => {
 							if (typeof data[0][key] === "string") {
@@ -108,7 +133,20 @@ export default defineComponent({
 					results.value = [];
 					console.log(e);
 				});
+
+			if (callback) {
+				callback();
+			}
 		};
+
+		// Mounted
+		onMounted(() => {
+			store.dispatch("getCategories");
+		});
+
+		watch([total, currentPage, perPage], () =>
+			handleCategoryChange(setTableContents)
+		);
 
 		return {
 			categories,
@@ -120,6 +158,11 @@ export default defineComponent({
 			tableContents,
 			setTableContents,
 			tableStyle,
+			total,
+			currentPage,
+			perPage,
+			updatePerPage,
+			updateCurrentPage,
 		};
 	},
 });

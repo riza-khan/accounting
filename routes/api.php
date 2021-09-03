@@ -35,10 +35,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('', [CompaniesController::class, 'index']);
     });
 
-    // Companies
+    // Categories
     Route::prefix('/categories')->group(function () {
         Route::get('', [CategoriesController::class, 'index']);
-        Route::get('/{category}', [QuickBooksAPIController::class, 'getAllByCategory']);
+        Route::post('{category}', [QuickBooksAPIController::class, 'getAllByCategory']);
     });
 
     Route::prefix('/quickbooks')->group(function () {

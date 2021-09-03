@@ -126,7 +126,7 @@ class QuickBooksAPIController extends Controller
         }
     }
 
-    public function getAllByCategory($request)
+    public function getAllByCategory(Request $request, $category)
     {
         $dataService = DataService::Configure(array(
             'auth_mode'       => 'oauth2',
@@ -140,13 +140,12 @@ class QuickBooksAPIController extends Controller
 
         $dataService->setLogLocation("../../../storage/logs/quickbooks.log");
         $dataService->throwExceptionOnError(true);
-        $allOfCategory = $dataService->Query("SELECT * FROM " . $request->category);
-        $countOfCategory = $dataService->Query("SELECT COUNT(*) FROM " . $request->category);
+        $allOfCategory = $dataService->Query("SELECT * FROM " . $category, $request->currentPage, $request->perPage);
+        $countOfCategory = $dataService->Query("SELECT COUNT(*) FROM " . $category);
 
         return response([
-            $request  => $allOfCategory,
+            $category  => $allOfCategory,
             "count" => $countOfCategory,
         ], 200);
-
     }
 }
