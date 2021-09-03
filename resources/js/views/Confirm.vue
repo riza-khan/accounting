@@ -20,7 +20,6 @@ export default defineComponent({
 				.then(() => {
 					Axios.get("/api/quickbooks/company")
 						.then(({ data }) => {
-							console.log(data);
 							store.commit("setCompany", data.company);
 							next({ name: "Company" });
 						})

@@ -1,50 +1,56 @@
 <template>
-	<select
-		v-if="categories.length"
-		id="categories"
-		name="category"
-		v-model="category"
-		@change="handleCategoryChange"
-	>
-		<option v-for="{ id, name } in categories" :value="name" :key="id">
-			{{ name }}
-		</option>
-	</select>
+	<div class="categories">
+		<select
+			v-if="categories.length"
+			id="categories"
+			name="category"
+			v-model="category"
+			@change="handleCategoryChange"
+			class="categories__select"
+		>
+			<option v-for="{ id, name } in categories" :value="name" :key="id">
+				{{ name }}
+			</option>
+		</select>
 
-	<div class="data-container">
-		<div class="data-container__headers">
-			<select
-				id="headers"
-				name="header"
-				multiple
-				v-model="tableHeaders"
-				:size="headers.length"
-				@change="setTableContents"
-			>
-				<option
-					v-for="(header, index) in headers"
-					:value="header"
-					:key="index"
+		<div class="data-container">
+			<div class="data-container__headers">
+				<select
+					id="headers"
+					name="header"
+					multiple
+					v-model="tableHeaders"
+					:size="headers.length"
+					@change="setTableContents"
 				>
-					{{ header }}
-				</option>
-			</select>
-		</div>
-
-		<div class="data-container__details">
-			<div class="data-container__details--headers" :style="tableStyle">
-				<div v-for="header in tableHeaders" :key="header">
-					{{ header }}
-				</div>
+					<option
+						v-for="(header, index) in headers"
+						:value="header"
+						:key="index"
+					>
+						{{ header }}
+					</option>
+				</select>
 			</div>
-			<div
-				v-for="(item, index) in tableContents"
-				:key="index"
-				class="data-container__details--content"
-				:style="tableStyle"
-			>
-				<div v-for="header in tableHeaders" :key="header">
-					{{ item[header] }}
+
+			<div class="data-container__details">
+				<div
+					class="data-container__details--headers"
+					:style="tableStyle"
+				>
+					<div v-for="header in tableHeaders" :key="header">
+						{{ header }}
+					</div>
+				</div>
+				<div
+					v-for="(item, index) in tableContents"
+					:key="index"
+					class="data-container__details--content"
+					:style="tableStyle"
+				>
+					<div v-for="header in tableHeaders" :key="header">
+						{{ item[header] }}
+					</div>
 				</div>
 			</div>
 		</div>

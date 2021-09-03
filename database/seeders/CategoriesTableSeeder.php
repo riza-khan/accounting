@@ -21,21 +21,6 @@ class CategoriesTableSeeder extends Seeder
         ]);
 
         Category::create([
-            'name' => 'Receipt',
-            'description' => 'Add receipt'
-        ]);
-
-        Category::create([
-            'name' => 'Supplier',
-            'description' => 'Add supplier'
-        ]);
-
-        Category::create([
-            'name' => 'Expense',
-            'description' => 'Add expense'
-        ]);
-
-        Category::create([
             'name' => 'Bill',
             'description' => 'Add bill'
         ]);
