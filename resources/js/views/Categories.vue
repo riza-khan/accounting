@@ -48,6 +48,7 @@
 					<div class="empty">
 						<input
 							type="checkbox"
+							v-model="allCheckbox"
 							@input="selectAll($event.target.checked)"
 						/>
 					</div>
@@ -64,7 +65,8 @@
 					<div>
 						<input
 							type="checkbox"
-							@input="selectItem($event.target.checked, item)"
+							:checked="targetElements.includes(index)"
+							@input="selectItem($event.target.checked, index)"
 						/>
 					</div>
 					<div v-for="header in tableHeaders" :key="header">
@@ -124,12 +126,27 @@ export default defineComponent({
 			});
 		};
 
-		const selectAll = (state: any) => {
-			console.log(state);
+		const allCheckbox = ref(false);
+		const targetElements = ref([]);
+
+		const selectAll = (state: boolean) => {
+			if (state) {
+				targetElements.value = tableContents.value.map(
+					(x: any, i: number) => i
+				);
+			} else {
+				targetElements.value = [];
+			}
 		};
 
-		const selectItem = (state: boolean, item: any) => {
-			console.log(state, item);
+		const selectItem = (state: boolean, index: number) => {
+			if (state) {
+				targetElements.value.push(index);
+			} else {
+				targetElements.value = targetElements.value.filter(
+					(num) => num !== index
+				);
+			}
 		};
 
 		const handleCategoryChange = () => {
@@ -161,7 +178,11 @@ export default defineComponent({
 		});
 
 		watch([total, currentPage, perPage], () => handleCategoryChange());
-		watch([results], () => setTableContents());
+		watch([results], () => {
+			setTableContents();
+			targetElements.value = [];
+			allCheckbox.value = false;
+		});
 
 		return {
 			categories,
@@ -180,6 +201,8 @@ export default defineComponent({
 			updateCurrentPage,
 			selectAll,
 			selectItem,
+			allCheckbox,
+			targetElements,
 		};
 	},
 });
