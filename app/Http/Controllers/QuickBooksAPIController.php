@@ -146,8 +146,5 @@ class QuickBooksAPIController extends Controller
             $request  => $allOfCategory,
         ], 200);
 
-
-
-
     }
 }
