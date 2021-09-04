@@ -34,13 +34,18 @@
 			</div>
 
 			<div class="data-container__details">
-				<Paginator
-					:total="total"
-					:perPage="perPage"
-					:currentPage="currentPage"
-					@changeCurrentPage="updateCurrentPage"
-					@changePerPage="updatePerPage"
-				/>
+				<div>
+					<div class="actions" v-if="targetElements.length">
+						<button @click="deleteTargetElements">Delete</button>
+					</div>
+					<Paginator
+						:total="total"
+						:perPage="perPage"
+						:currentPage="currentPage"
+						@changeCurrentPage="updateCurrentPage"
+						@changePerPage="updatePerPage"
+					/>
+				</div>
 				<div
 					class="data-container__details--headers"
 					:style="tableStyle"
@@ -70,7 +75,9 @@
 						/>
 					</div>
 					<div v-for="header in tableHeaders" :key="header">
-						{{ item[header] }}
+						<p @click="handleItemClick">
+							{{ item[header] }}
+						</p>
 					</div>
 				</div>
 			</div>
@@ -91,10 +98,10 @@ export default defineComponent({
 		const store = useStore();
 		const category = ref("");
 		const results = ref([]);
-		const headers = ref<string[] | undefined>([]);
+		const headers = ref([]);
 		const tableHeaders = ref([]);
 		const categories = computed(() => store.getters["getCategories"]);
-		const tableContents = ref([]);
+		const tableContents = ref<any[]>([]);
 		const tableStyle = computed(
 			() =>
 				`grid-template-columns: 50px repeat(${tableHeaders.value.length}, 1fr)`
@@ -127,7 +134,16 @@ export default defineComponent({
 		};
 
 		const allCheckbox = ref(false);
-		const targetElements = ref([]);
+		const targetElements = ref<number[]>([]);
+
+		const deleteTargetElements = () => {
+			const deleteTargets = tableContents.value.filter(
+				(item: any, index: number) =>
+					targetElements.value.includes(index)
+			);
+
+			console.log(deleteTargets);
+		};
 
 		const selectAll = (state: boolean) => {
 			if (state) {
@@ -149,6 +165,10 @@ export default defineComponent({
 			}
 		};
 
+		const handleItemClick = () => {
+			console.log("called");
+		};
+
 		const handleCategoryChange = () => {
 			Axios.post(`/api/categories/${category.value}`, {
 				currentPage: +currentPage.value,
@@ -164,7 +184,7 @@ export default defineComponent({
 							}
 						})
 						.filter((i) => i);
-					results.value = data;
+					results.value = data.sort((a: any, b: any) => a.Id - b.Id);
 				})
 				.catch((e) => {
 					results.value = [];
@@ -203,8 +223,9 @@ export default defineComponent({
 			selectItem,
 			allCheckbox,
 			targetElements,
+			handleItemClick,
+			deleteTargetElements,
 		};
 	},
 });
 </script>
-
