@@ -10,58 +10,9 @@ use QuickBooksOnline\API\DataService\DataService;
 
 class QuickBooksAPIController extends Controller
 {
-    public function index(): string
+    public function dataService()
     {
-        # Establish the connection to the quick books here
-        $dataService = DataService::Configure(array(
-            'auth_mode'    => env('QUICKBOOKS_AUTH_MODE'),
-            'ClientID'     => env('QUICKBOOKS_CLIENT_ID'),
-            'ClientSecret' => env('QUICKBOOKS_CLIENT_SECRET'),
-            'RedirectURI'  => env('QUICKBOOKS_REDIRECT_URI'),
-            'scope'        => env('QUICKBOOKS_SCOPES'),
-            'baseUrl'      => "development"
-        ));
-
-        $OAuth2LoginHelper = $dataService->getOAuth2LoginHelper();
-        $authUrl = $OAuth2LoginHelper->getAuthorizationCodeURL();
-
-        return $authUrl;
-    }
-
-    public function getAuthorizationTokens(Request $request)
-    {
-        $code = $request->input('code');
-        $realmId = $request->input('realmId');
-
-        $dataService = DataService::Configure(array(
-            'auth_mode'    => env('QUICKBOOKS_AUTH_MODE'),
-            'ClientID'     => env('QUICKBOOKS_CLIENT_ID'),
-            'ClientSecret' => env('QUICKBOOKS_CLIENT_SECRET'),
-            'RedirectURI'  => env('QUICKBOOKS_REDIRECT_URI'),
-            'scope'        => env('QUICKBOOKS_SCOPES'),
-            'QBORealmID'   => $realmId,
-            'baseUrl'      => "development"
-        ));
-
-        $OAuth2LoginHelper = $dataService->getOAuth2LoginHelper();
-        $accessToken = $OAuth2LoginHelper->exchangeAuthorizationCodeForToken($code, $realmId);
-
-        User::where('id', Auth::user()->id)->update([
-            'access_token_key' => $accessToken->getAccessToken(),
-            'access_token_secret' => $accessToken->getRefreshToken(),
-            'target_realm' => $realmId,
-        ]);
-
-        if (!$accessToken) {
-            return response(['Server Error'], 500);
-        }
-
-        return response(['user' => Auth::user()], 200);
-    }
-
-    public function getInfo()
-    {
-        $dataService = DataService::Configure(array(
+        return DataService::Configure(array(
             'auth_mode'       => 'oauth2',
             'ClientID'        => env('QUICKBOOKS_CLIENT_ID'),
             'ClientSecret'    => env('QUICKBOOKS_CLIENT_SECRET'),
@@ -70,11 +21,14 @@ class QuickBooksAPIController extends Controller
             'QBORealmID'      => Auth::user()->target_realm,
             'baseUrl'         => "Development"
         ));
+    }
 
-        $dataService->setLogLocation("../../../storage/logs/quickbooks.log");
-        $dataService->throwExceptionOnError(true);
+    public function getInfo()
+    {
+        $this->dataService()->setLogLocation("../../../storage/logs/quickbooks.log");
+        $this->dataService()->throwExceptionOnError(true);
 
-        $companyData = $dataService->getCompanyInfo();
+        $companyData = $this->dataService()->getCompanyInfo();
 
         return response([
             'company'  => $companyData,
@@ -83,17 +37,7 @@ class QuickBooksAPIController extends Controller
 
     public function batchInvoices()
     {
-        $dataService = DataService::Configure(array(
-            'auth_mode'       => 'oauth2',
-            'ClientID'        => env('QUICKBOOKS_CLIENT_ID'),
-            'ClientSecret'    => env('QUICKBOOKS_CLIENT_SECRET'),
-            'accessTokenKey'  => Auth::user()->access_token_key,
-            'refreshTokenKey' => Auth::user()->acces_token_secret,
-            'QBORealmID'      => Auth::user()->target_realm,
-            'baseUrl'         => "Development"
-        ));
-
-        $batch = $dataService->CreateNewBatch();
+        $batch = $this->CreateNewBatch();
 
         $invoices = \App\Models\Invoice::all()->take(30);
 
@@ -128,24 +72,19 @@ class QuickBooksAPIController extends Controller
 
     public function getAllByCategory(Request $request, $category)
     {
-        $dataService = DataService::Configure(array(
-            'auth_mode'       => 'oauth2',
-            'ClientID'        => env('QUICKBOOKS_CLIENT_ID'),
-            'ClientSecret'    => env('QUICKBOOKS_CLIENT_SECRET'),
-            'accessTokenKey'  => Auth::user()->access_token_key,
-            'refreshTokenKey' => Auth::user()->acces_token_secret,
-            'QBORealmID'      => Auth::user()->target_realm,
-            'baseUrl'         => "Development"
-        ));
-
-        $dataService->setLogLocation("../../../storage/logs/quickbooks.log");
-        $dataService->throwExceptionOnError(true);
-        $allOfCategory = $dataService->Query("SELECT * FROM " . $category, $request->currentPage, $request->perPage);
-        $countOfCategory = $dataService->Query("SELECT COUNT(*) FROM " . $category);
+        $this->dataService()->setLogLocation("../../../storage/logs/quickbooks.log");
+        $this->dataService()->throwExceptionOnError(true);
+        $allOfCategory = $this->dataService()->Query("SELECT * FROM " . $category, $request->currentPage, $request->perPage);
+        $countOfCategory = $this->dataService()->Query("SELECT COUNT(*) FROM " . $category);
 
         return response([
             $category  => $allOfCategory,
             "count" => $countOfCategory,
         ], 200);
+    }
+
+    public function batchDelete(Request $request)
+    {
+        logs($request);
     }
 }
