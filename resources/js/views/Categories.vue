@@ -31,6 +31,7 @@
 						{{ header }}
 					</option>
 				</select>
+				<pre>{{ targetElements }}</pre>
 			</div>
 
 			<div class="data-container__details">
@@ -70,8 +71,8 @@
 					<div>
 						<input
 							type="checkbox"
-							:checked="targetElements.includes(index)"
-							@input="selectItem($event.target.checked, index)"
+							:checked="targetElements.includes(item.id)"
+							@input="selectItem($event.target.checked, item)"
 						/>
 					</div>
 					<div v-for="header in tableHeaders" :key="header">
@@ -91,13 +92,17 @@ import Axios from "../api";
 import Paginator from "../components/molecules/Paginator.vue";
 import { useStore } from "vuex";
 
+interface Obj {
+	id: string;
+}
+
 export default defineComponent({
 	name: "Categories",
 	components: { Paginator },
 	setup() {
 		const store = useStore();
 		const category = ref("");
-		const results = ref([]);
+		const results = ref<any[]>([]);
 		const headers = ref<string[] | null>([]);
 		const tableHeaders = ref([]);
 		const categories = computed(() => store.getters["getCategories"]);
@@ -123,23 +128,24 @@ export default defineComponent({
 
 		// Table of Contents
 		const setTableContents = () => {
-			tableContents.value = results.value.map((result) => {
-				const obj = {};
-				tableHeaders.value.forEach(
-					(header) => (obj[header] = result[header])
-				);
+			tableContents.value = results.value.map((result: any) => {
+				const obj: Obj = {};
+				tableHeaders.value.forEach((header) => {
+					obj["id"] = result.Id;
+					obj[header] = result[header];
+				});
 
 				return obj;
 			});
 		};
 
 		const allCheckbox = ref(false);
-		const targetElements = ref<number[]>([]);
+		const targetElements = ref<string[]>([]);
 
 		const deleteTargetElements = () => {
-			const deleteTargets = tableContents.value.filter(
-				(item: any, index: number) =>
-					targetElements.value.includes(index)
+			console.log(targetElements.value);
+			const deleteTargets = results.value.filter((item: any) =>
+				targetElements.value.includes(item.Id)
 			);
 
 			console.log(deleteTargets);
@@ -148,24 +154,25 @@ export default defineComponent({
 		const selectAll = (state: boolean) => {
 			if (state) {
 				targetElements.value = tableContents.value.map(
-					(x: any, i: number) => i
+					(item: any) => item.id
 				);
 			} else {
 				targetElements.value = [];
 			}
 		};
 
-		const selectItem = (state: boolean, index: number) => {
+		const selectItem = (state: boolean, item: any) => {
 			if (state) {
-				targetElements.value.push(index);
+				targetElements.value.push(item.id);
 			} else {
 				targetElements.value = targetElements.value.filter(
-					(num) => num !== index
+					(i) => i.id !== item.id
 				);
 			}
 		};
 
 		const handleItemClick = () => {
+			// Show contents in a model and allow the ability to update individual items
 			console.log("called");
 		};
 
@@ -198,7 +205,7 @@ export default defineComponent({
 		});
 
 		watch([total, currentPage, perPage], () => handleCategoryChange());
-		watch([results], () => {
+		watch(results, () => {
 			setTableContents();
 			targetElements.value = [];
 			allCheckbox.value = false;
