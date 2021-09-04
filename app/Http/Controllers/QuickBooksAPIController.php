@@ -66,7 +66,7 @@ class QuickBooksAPIController extends Controller
             'ClientID'        => env('QUICKBOOKS_CLIENT_ID'),
             'ClientSecret'    => env('QUICKBOOKS_CLIENT_SECRET'),
             'accessTokenKey'  => Auth::user()->access_token_key,
-            'refreshTokenKey' => Auth::user()->acces_token_secret,
+            'refreshTokenKey' => Auth::user()->access_token_secret,
             'QBORealmID'      => Auth::user()->target_realm,
             'baseUrl'         => "Development"
         ));
