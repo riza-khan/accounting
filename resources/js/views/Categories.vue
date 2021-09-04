@@ -98,7 +98,7 @@ export default defineComponent({
 		const store = useStore();
 		const category = ref("");
 		const results = ref([]);
-		const headers = ref([]);
+		const headers = ref<string[] | null>([]);
 		const tableHeaders = ref([]);
 		const categories = computed(() => store.getters["getCategories"]);
 		const tableContents = ref<any[]>([]);
