@@ -27,5 +27,16 @@
 			top: 10px;
 			right: 10px;
 		}
+
+		&--content {
+			display: flex;
+			grid-gap: 10px;
+			flex-direction: column;
+
+			&--item {
+				display: flex;
+				grid-gap: 5px;
+			}
+		}
 	}
 }
