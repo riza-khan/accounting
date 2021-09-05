@@ -23,6 +23,9 @@ export default createStore({
         setToken(state, token) {
             state.token = token;
         },
+        setModalTargetObj(state, obj) {
+            state.modalTargetObj = obj;
+        },
         setCompany(state, company) {
             state.company = company;
         },

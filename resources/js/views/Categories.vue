@@ -76,7 +76,7 @@
 						/>
 					</div>
 					<div v-for="header in tableHeaders" :key="header">
-						<p @click="handleItemClick">
+						<p @click="handleItemClick(item)">
 							{{ item[header] }}
 						</p>
 					</div>
@@ -174,9 +174,11 @@ export default defineComponent({
 			}
 		};
 
-		const handleItemClick = () => {
-			// Show contents in a model and allow the ability to update individual items
-			console.log("called");
+		const handleItemClick = (item: any) => {
+			store.commit(
+				"setModalTargetObj",
+				results.value.find((result) => result.Id === item.id)
+			);
 		};
 
 		const handleCategoryChange = () => {
