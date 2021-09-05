@@ -12,10 +12,13 @@
 	"devDependencies": {
 		"@tailwindcss/forms": "^0.2.1",
 		"@types/lodash": "^4.14.172",
+		"@typescript-eslint/eslint-plugin": "^4.30.0",
+		"@typescript-eslint/parser": "^4.30.0",
 		"alpinejs": "^2.7.3",
 		"autoprefixer": "^10.1.0",
 		"axios": "^0.21.1",
 		"eslint": "^7.32.0",
+		"eslint-plugin-vue": "^7.17.0",
 		"laravel-mix": "^6.0.6",
 		"lodash": "^4.17.19",
 		"postcss": "^8.2.1",

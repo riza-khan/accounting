@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\QuickBooksAPIController;
 use Illuminate\Http\Request;
@@ -42,9 +43,10 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('/quickbooks')->group(function () {
-        Route::get('/connect', [QuickBooksAPIController::class, 'index']);
-        Route::post('/connect', [QuickBooksAPIController::class, 'getAuthorizationTokens']);
+        Route::get('/connect', [ConnectionController::class, 'index']);
+        Route::post('/connect', [ConnectionController::class, 'getAuthorizationTokens'])->middleware('auth');
         Route::get('/company', [QuickBooksAPIController::class, 'getInfo']);
+        Route::post('/batch-delete/{category}', [QuickBooksAPIController::class, 'batchDelete']);
         Route::get('/batch-invoices', [QuickBooksAPIController::class, 'batchInvoices']);
     });
 });

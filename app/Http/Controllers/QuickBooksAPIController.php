@@ -45,12 +45,12 @@ class QuickBooksAPIController extends Controller
             $newInvoice = Invoice::create([
                 "Line" => [
                     [
-                        "Amount" => $invoice->amount,
-                        "DetailType" => "SalesItemLineDetail",
+                        "Amount"              => $invoice->amount,
+                        "DetailType"          => "SalesItemLineDetail",
                         "SalesItemLineDetail" => [
                             "ItemRef" => [
                                 "value" => 1,
-                                "name" => "Services"
+                                "name"  => "Services"
                             ]
                         ]
                     ]
@@ -74,17 +74,31 @@ class QuickBooksAPIController extends Controller
     {
         $this->dataService()->setLogLocation("../../../storage/logs/quickbooks.log");
         $this->dataService()->throwExceptionOnError(true);
-        $allOfCategory = $this->dataService()->Query("SELECT * FROM " . $category, $request->currentPage, $request->perPage);
+        $allOfCategory   = $this->dataService()->Query("SELECT * FROM " . $category, $request->currentPage, $request->perPage);
         $countOfCategory = $this->dataService()->Query("SELECT COUNT(*) FROM " . $category);
 
         return response([
-            $category  => $allOfCategory,
-            "count" => $countOfCategory,
+            $category => $allOfCategory,
+            "count"   => $countOfCategory,
         ], 200);
     }
 
-    public function batchDelete(Request $request)
+    public function batchDelete(Request $request, $category)
     {
-        logs($request);
+
+        $chunks = array_chunk($request->data, 30);
+
+        foreach ($chunks as $key => $value) {
+            $batch[$key] = $this->dataService()->CreateNewBatch();
+
+            foreach ($value as $id) {
+                $item = $this->dataService()->FindById($category, $id);
+                $batch[$key]->AddEntity($item, $id, "delete");
+            }
+
+            $batch[$key]->Execute();
+        }
+
+        return response()->json(['message' => 'Items Deleted'], 200);
     }
 }

@@ -1,13 +1,20 @@
 <template>
 	<div class="modal">
-		<h1>I am a modal</h1>
+		<pre>{{ obj }}</pre>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import {useStore} from 'vuex'
 
 export default defineComponent({
+	props: {
+		obj: {
+			type: Object,
+			default: () => ({}),
+		},
+	},
 	setup() {
 		return {};
 	},

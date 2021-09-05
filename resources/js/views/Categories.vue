@@ -143,12 +143,15 @@ export default defineComponent({
 		const targetElements = ref<string[]>([]);
 
 		const deleteTargetElements = () => {
-			console.log(targetElements.value);
-			const deleteTargets = results.value.filter((item: any) =>
-				targetElements.value.includes(item.Id)
-			);
+			const deleteTargets = results.value
+				.filter((item: any) => targetElements.value.includes(item.Id))
+				.map(({ Id }: any) => +Id);
 
-			console.log(deleteTargets);
+			Axios.post(`/api/quickbooks/batch-delete/${category.value}`, {
+				data: deleteTargets,
+			})
+				.then((res) => console.log(res))
+				.catch((e) => console.log(e));
 		};
 
 		const selectAll = (state: boolean) => {
