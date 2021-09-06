@@ -19,12 +19,7 @@ class ImportController extends Controller
         return back()->withStatus('Excel file imported successfully');
     }
 
-    /**
-     * Importing car data from excel file
-     *
-     * @return void
-     */
-    public function cars(Request $request):Response
+    public function cars(Request $request): Response
     {
         $file = $request->file('file')->store('import');
 
@@ -32,12 +27,11 @@ class ImportController extends Controller
         return response('File successfully imported', 200);
     }
 
-    public function invoices(Request $request):Response
+    public function invoices(Request $request): Response
     {
         $file = $request->file('file')->store('import');
 
         (new InvoiceImport)->import($file);
         return response('File successfully imported', 200);
     }
-
 }

@@ -3,24 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use QuickBooksOnline\API\Facades\Invoice;
-use QuickBooksOnline\API\DataService\DataService;
 
 class QuickBooksAPIController extends Controller
 {
-    public function dataService()
-    {
-        return DataService::Configure(array(
-            'auth_mode'       => 'oauth2',
-            'ClientID'        => env('QUICKBOOKS_CLIENT_ID'),
-            'ClientSecret'    => env('QUICKBOOKS_CLIENT_SECRET'),
-            'accessTokenKey'  => Auth::user()->access_token_key,
-            'refreshTokenKey' => Auth::user()->access_token_secret,
-            'QBORealmID'      => Auth::user()->target_realm,
-            'baseUrl'         => "Development"
-        ));
-    }
 
     public function getInfo()
     {
@@ -32,41 +17,6 @@ class QuickBooksAPIController extends Controller
         return response([
             'company'  => $companyData,
         ], 200);
-    }
-
-    public function batchInvoices()
-    {
-        $batch = $this->CreateNewBatch();
-
-        $invoices = \App\Models\Invoice::all()->take(30);
-
-        foreach ($invoices as $invoice) {
-            $newInvoice = Invoice::create([
-                "Line" => [
-                    [
-                        "Amount"              => $invoice->amount,
-                        "DetailType"          => "SalesItemLineDetail",
-                        "SalesItemLineDetail" => [
-                            "ItemRef" => [
-                                "value" => 1,
-                                "name"  => "Services"
-                            ]
-                        ]
-                    ]
-                ],
-                "CustomerRef" => [
-                    "value" => 1
-                ]
-            ]);
-            $batch->AddEntity($newInvoice, $invoice->invoice_number, "Create");
-        }
-
-        // Run a batch
-        $batch->Execute();
-        $error = $batch->getLastError();
-        if ($error) {
-            return response(['error' => $error], 500);
-        }
     }
 
     public function getAllByCategory(Request $request, $category)
@@ -94,7 +44,6 @@ class QuickBooksAPIController extends Controller
                 $item = $this->dataService()->FindById($category, $id);
                 $batch[$key]->AddEntity($item, $id, "delete");
             }
-
             $batch[$key]->Execute();
         }
 

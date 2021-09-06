@@ -10,16 +10,17 @@ class InvoicesController extends Controller
     public function batchInvoices()
     {
         $invoices = \App\Models\Invoice::get();
-        $chunks = array_chunk($invoices, 30);
+        $chunks = array_chunk($invoices->toArray(), 30);
 
         foreach ($chunks as $key => $value) {
 
             $batch[$key] = $this->dataService()->CreateNewBatch();
+
             foreach ($value as $invoice) {
                 $newInvoice = Invoice::create([
                     "Line" => [
                         [
-                            "Amount"              => $invoice->amount,
+                            "Amount"              => $invoice['amount'],
                             "DetailType"          => "SalesItemLineDetail",
                             "SalesItemLineDetail" => [
                                 "ItemRef" => [
@@ -33,7 +34,7 @@ class InvoicesController extends Controller
                         "value" => 1
                     ]
                 ]);
-                $batch[$key]->AddEntity($newInvoice, $invoice->invoice_number, "Create");
+                $batch[$key]->AddEntity($newInvoice, $invoice['invoice_number'], "create");
             }
             $batch[$key]->Execute();
         }
