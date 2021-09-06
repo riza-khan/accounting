@@ -15,13 +15,13 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-import Axios from "../api";
+import Axios from "../../api";
 
 export default defineComponent({
 	props: {
 		category: {
-			type: String,
-			default: "",
+			type: Object,
+			default: () => ({}),
 		},
 	},
 	setup(props) {
@@ -42,8 +42,8 @@ export default defineComponent({
 			const formData = new FormData();
 			formData.append("file", file.value);
 			Axios.post(
-				"/api/invoice-import",
-				{ file: formData, category: props.category },
+				`/api/import-${props.category.name.toLowerCase()}`,
+				formData,
 				{
 					headers: {
 						"Content-Type": "multipart/form-data",
