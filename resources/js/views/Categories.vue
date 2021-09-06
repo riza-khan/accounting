@@ -22,6 +22,7 @@
 					v-model="tableHeaders"
 					:size="headers.length"
 					@change="setTableContents"
+                    class="multi-select"
 				>
 					<option
 						v-for="(header, index) in headers"
@@ -31,7 +32,6 @@
 						{{ header }}
 					</option>
 				</select>
-				<pre>{{ targetElements }}</pre>
 			</div>
 
 			<div class="data-container__details">
@@ -93,7 +93,7 @@ import Paginator from "../components/molecules/Paginator.vue";
 import { useStore } from "vuex";
 
 interface Obj {
-	id: string;
+	id?: string;
 }
 
 export default defineComponent({
