@@ -9,6 +9,7 @@
 body {
   font-family: "Roboto", sans-serif;
   padding: 10px;
+  min-height: 100vh;
 }
 
 form {
@@ -46,6 +47,69 @@ form {
 }
 .paginator--current_page {
   color: #e94f37;
+}
+
+.data-container {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 250px 1fr;
+}
+.data-container__headers .multi-select {
+  overflow: hidden;
+  width: 100%;
+  border: solid 2px red;
+  padding: 5px;
+  border-radius: 5px;
+}
+.data-container__details {
+  display: grid;
+}
+.data-container__details--headers {
+  display: grid;
+  grid-gap: 10px;
+  font-weight: bold;
+  border-bottom: solid 1px red;
+  margin-bottom: 1rem;
+}
+.data-container__details--content {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.categories__select {
+  margin: 1rem 0;
+}
+
+.uploads {
+  margin: 2rem 0;
+}
+.uploads__content {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 30px;
+}
+.uploads__content--card {
+  padding: 1rem;
+  border-radius: 10px;
+  border: solid 1px red;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-gap: 1rem;
+  position: relative;
+}
+.uploads__content--card--title {
+  position: absolute;
+  top: -25px;
+  left: 0px;
+}
+.uploads__content--card--right {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+}
+.uploads__content--card--right--actions {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
 }
 
 a, .router-link-exact-active {
@@ -118,8 +182,59 @@ button:hover, .btn-lg:hover, .btn-danger-lg:hover, .btn-md:hover, .btn-sm:hover,
 
 .navbar {
   display: flex;
-  justify-content: center;
-  grid-gap: 10px;
-  padding: 10px;
   width: 100%;
+  justify-content: space-between;
+  grid-gap: 10px;
+  width: 100%;
+}
+.navbar__links {
+  display: flex;
+  grid-gap: 5px;
+}
+
+.loader {
+  z-index: 1000;
+  position: absolute;
+  display: flex;
+  margin: auto;
+  height: 100vh;
+  width: 100%;
+}
+.loader__item {
+  margin: auto;
+}
+
+.modal {
+  position: absolute;
+  display: flex;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+}
+.modal__body {
+  border-radius: 10px;
+  overflow: auto;
+  background: white;
+  display: flex;
+  margin: auto;
+  width: 80%;
+  height: 80%;
+  padding: 10px;
+  position: relative;
+}
+.modal__body--close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.modal__body--content {
+  display: flex;
+  grid-gap: 10px;
+  flex-direction: column;
+}
+.modal__body--content--item {
+  display: flex;
+  grid-gap: 5px;
 }
