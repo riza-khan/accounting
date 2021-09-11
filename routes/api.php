@@ -24,10 +24,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    // Cars
-    Route::get('/cars', [CarsController::class, 'index']);
-    Route::post('/cars-import', [ImportController::class, 'cars']);
-
     // Invoices
     Route::get('/invoices', [CarsController::class, 'index']);
     Route::post('/import-invoice', [ImportController::class, 'invoices']);
