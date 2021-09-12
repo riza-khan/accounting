@@ -1,14 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\ImportController;
-use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\QuickBooksAPIController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,9 +22,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
 
     // Invoices
-    Route::get('/invoices', [CarsController::class, 'index']);
-    Route::post('/import-invoice', [ImportController::class, 'invoices']);
-    Route::get('/upload-invoices', [InvoicesController::class, 'batchInvoices']);
+    Route::prefix('/invoices')->group(function () {
+        Route::get('', [CarsController::class, 'index']);
+        Route::post('import', [ImportController::class, 'invoices']);
+    });
+
+    // Bills
+    Route::prefix('/bills')->group(function () {
+        Route::post('import', [ImportController::class, 'invoices']);
+    });
 
     // Companies
     Route::prefix('/companies')->group(function () {
@@ -40,6 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('{category}', [QuickBooksAPIController::class, 'getAllByCategory']);
     });
 
+    // Quickbooks
     Route::prefix('/quickbooks')->group(function () {
         Route::get('/connect', [ConnectionController::class, 'index']);
         Route::post('/connect', [ConnectionController::class, 'getAuthorizationTokens'])->middleware('auth');
