@@ -94,7 +94,7 @@ import { useStore } from "vuex";
 
 interface Obj {
 	id?: string;
-    header?: any
+    header?: string
 }
 
 export default defineComponent({
