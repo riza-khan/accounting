@@ -16,7 +16,7 @@ class InvoiceImport extends Import implements WithBatchInserts, WithChunkReading
             $this->qb->dataService();
 
             $batch = $this->qb->dataService()->CreateNewBatch();
-            $newInvoice = Invoice::create([
+            $newBill = Invoice::create([
                 "Line" => [
                     [
                         "Amount"              => $row[6],
@@ -34,7 +34,7 @@ class InvoiceImport extends Import implements WithBatchInserts, WithChunkReading
                 ]
             ]);
 
-            $batch->AddEntity($newInvoice, $row[2], "create");
+            $batch->AddEntity($newBill, $row[2], "create");
             $batch->Execute();
         }
 
