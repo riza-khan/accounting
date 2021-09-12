@@ -21,15 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    // Invoices
-    Route::prefix('/invoices')->group(function () {
-        Route::get('', [CarsController::class, 'index']);
-        Route::post('import', [ImportController::class, 'invoices']);
-    });
-
-    // Bills
-    Route::prefix('/bills')->group(function () {
-        Route::post('import', [ImportController::class, 'invoices']);
+    // Quickbooks
+    Route::prefix('/quickbooks')->group(function () {
+        Route::get('/connect', [ConnectionController::class, 'index']);
+        Route::post('/connect', [ConnectionController::class, 'getAuthorizationTokens'])->middleware('auth');
+        Route::get('/company', [QuickBooksAPIController::class, 'getInfo']);
+        Route::post('/batch-delete/{category}', [QuickBooksAPIController::class, 'batchDelete']);
     });
 
     // Companies
@@ -43,11 +40,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('{category}', [QuickBooksAPIController::class, 'getAllByCategory']);
     });
 
-    // Quickbooks
-    Route::prefix('/quickbooks')->group(function () {
-        Route::get('/connect', [ConnectionController::class, 'index']);
-        Route::post('/connect', [ConnectionController::class, 'getAuthorizationTokens'])->middleware('auth');
-        Route::get('/company', [QuickBooksAPIController::class, 'getInfo']);
-        Route::post('/batch-delete/{category}', [QuickBooksAPIController::class, 'batchDelete']);
+    // Quickbooks entities:
+    // Invoices
+    Route::prefix('/invoice')->group(function () {
+        Route::get('', [CarsController::class, 'index']);
+        Route::post('import', [ImportController::class, 'invoices']);
+    });
+
+    // Bills
+    Route::prefix('/bill')->group(function () {
+        Route::post('import', [ImportController::class, 'invoices']);
     });
 });
