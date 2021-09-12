@@ -94,6 +94,7 @@ import { useStore } from "vuex";
 
 interface Obj {
 	id?: string;
+    header?: any
 }
 
 export default defineComponent({
@@ -122,7 +123,6 @@ export default defineComponent({
 		};
 
 		const updatePerPage = (by: number) => {
-			console.log(by);
 			perPage.value = by;
 		};
 
@@ -130,7 +130,7 @@ export default defineComponent({
 		const setTableContents = () => {
 			tableContents.value = results.value.map((result: any) => {
 				const obj: Obj = {};
-				tableHeaders.value.forEach((header) => {
+				tableHeaders.value.forEach((header:any) => {
 					obj["id"] = result.Id;
 					obj[header] = result[header];
 				});
@@ -169,7 +169,7 @@ export default defineComponent({
 				targetElements.value.push(item.id);
 			} else {
 				targetElements.value = targetElements.value.filter(
-					(i) => i.id !== item.id
+					(i:any) => i.id !== item.id
 				);
 			}
 		};
@@ -190,7 +190,7 @@ export default defineComponent({
 					const data = response.data[category.value];
 					total.value = response.data.count;
 					headers.value = Object.keys(data[0])
-						.map((key) => {
+						.map((key:any) => {
 							if (typeof data[0][key] === "string") {
 								return key;
 							}
