@@ -2,13 +2,13 @@
 
 namespace App\Imports;
 
-use QuickBooksOnline\API\Facades\Invoice;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Illuminate\Support\Collection;
+use QuickBooksOnline\API\Facades\Bill;
 
-class InvoiceImport extends Import implements WithBatchInserts, WithChunkReading, ToCollection
+class BillImport extends Import implements WithBatchInserts, WithChunkReading, ToCollection
 {
     public function collection(Collection $rows)
     {
@@ -16,22 +16,8 @@ class InvoiceImport extends Import implements WithBatchInserts, WithChunkReading
             $this->qb->dataService();
 
             $batch = $this->qb->dataService()->CreateNewBatch();
-            $newInvoice = Invoice::create([
-                "Line" => [
-                    [
-                        "Amount"              => $row[6],
-                        "DetailType"          => "SalesItemLineDetail",
-                        "SalesItemLineDetail" => [
-                            "ItemRef" => [
-                                "value" => 1,
-                                "name"  => "Services"
-                            ]
-                        ]
-                    ]
-                ],
-                "CustomerRef" => [
-                    "value" => 1
-                ]
+            $newInvoice = Bill::create([
+                // Bill structure from API goes here
             ]);
 
             $batch->AddEntity($newInvoice, $row[2], "create");
