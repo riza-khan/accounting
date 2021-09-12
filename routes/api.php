@@ -49,6 +49,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Bills
     Route::prefix('/bill')->group(function () {
-        Route::post('import', [ImportController::class, 'invoices']);
+        Route::post('import', [ImportController::class, 'bills']);
     });
 });

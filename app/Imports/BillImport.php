@@ -17,7 +17,21 @@ class BillImport extends Import implements WithBatchInserts, WithChunkReading, T
 
             $batch = $this->qb->dataService()->CreateNewBatch();
             $newInvoice = Bill::create([
-                // Bill structure from API goes here
+                "Line" => [
+                    [
+                        "DetailType" => "AccountBasedExpenseLineDetail",
+                        "Amount" => $row[6],
+                        "Id" => "1",
+                        "AccountBasedExpenseLineDetail" => [
+                            "AccountRef" => [
+                                "value" => "7"
+                            ]
+                        ]
+                    ]
+                ],
+                "VendorRef" => [
+                    "value" => "56"
+                ]
             ]);
 
             $batch->AddEntity($newInvoice, $row[2], "create");
