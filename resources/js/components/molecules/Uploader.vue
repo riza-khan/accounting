@@ -42,7 +42,7 @@ export default defineComponent({
 			const formData = new FormData();
 			formData.append("file", file.value);
 			Axios.post(
-				`/api/import-${props.category.name.toLowerCase()}`,
+				`/api/${props.category.name.toLowerCase()}/import`,
 				formData,
 				{
 					headers: {
