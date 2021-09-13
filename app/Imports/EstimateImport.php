@@ -18,19 +18,78 @@ class EstimateImport extends Import implements WithBatchInserts, WithChunkReadin
             $batch = $this->qb->dataService()->CreateNewBatch();
             $newEstimate = Estimate::create([
                 [
-                    "GivenName" => "John",
-                    "SSN" => "444-55-6666",
-                    "PrimaryAddr" => [
+                    "TotalAmt" => 31.5,
+                    "BillEmail" => [
+                        "Address" => "Cool_Cars@intuit.com"
+                    ],
+                    "CustomerMemo" => [
+                        "value" => "Thank you for your business and have a great day!"
+                    ],
+                    "ShipAddr" => [
+                        "City" => "Half Moon Bay",
+                        "Line1" => "65 Ocean Dr.",
+                        "PostalCode" => "94213",
+                        "Lat" => "37.4300318",
+                        "Long" => "-122.4336537",
                         "CountrySubDivisionCode" => "CA",
-                        "City" => "Middlefield",
-                        "PostalCode" => "93242",
-                        "Id" => "50",
-                        "Line1" => "45 N. Elm Street"
+                        "Id" => "4"
                     ],
-                    "PrimaryPhone" => [
-                        "FreeFormNumber" => "408-525-1234"
+                    "PrintStatus" => "NeedToPrint",
+                    "EmailStatus" => "NotSet",
+                    "BillAddr" => [
+                        "City" => "Half Moon Bay",
+                        "Line1" => "65 Ocean Dr.",
+                        "PostalCode" => "94213",
+                        "Lat" => "37.4300318",
+                        "Long" => "-122.4336537",
+                        "CountrySubDivisionCode" => "CA",
+                        "Id" => "4"
                     ],
-                    "FamilyName" => "Meuller"
+                    "Line" => [
+                        [
+                            "Description" => "Pest Control Services",
+                            "DetailType" => "SalesItemLineDetail",
+                            "SalesItemLineDetail" => [
+                                "TaxCodeRef" => [
+                                    "value" => "NON"
+                                ],
+                                "Qty" => 1,
+                                "UnitPrice" => 35,
+                                "ItemRef" => [
+                                    "name" => "Pest Control",
+                                    "value" => "10"
+                                ]
+                            ],
+                            "LineNum" => 1,
+                            "Amount" => 35.0,
+                            "Id" => "1"
+                        ],
+                        [
+                            "DetailType" => "SubTotalLineDetail",
+                            "Amount" => 35.0,
+                            "SubTotalLineDetail" => []
+                        ],
+                        [
+                            "DetailType" => "DiscountLineDetail",
+                            "Amount" => 3.5,
+                            "DiscountLineDetail" => [
+                                "DiscountAccountRef" => [
+                                    "name" => "Discounts given",
+                                    "value" => "86"
+                                ],
+                                "PercentBased" => true,
+                                "DiscountPercent" => 10
+                            ]
+                        ]
+                    ],
+                    "CustomerRef" => [
+                        "name" => "Cool Cars",
+                        "value" => "3"
+                    ],
+                    "TxnTaxDetail" => [
+                        "TotalTax" => 0
+                    ],
+                    "ApplyTaxAfterDiscount" => false
                 ]
             ]);
 

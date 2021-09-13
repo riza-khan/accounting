@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\CarsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\ConnectionController;
@@ -52,6 +51,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('import', [ImportController::class, 'bills']);
     });
 
+    // BillPayment
+
     // Customers
     Route::prefix('/customer')->group(function () {
         Route::post('import', [ImportController::class, 'customers']);
@@ -61,4 +62,38 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/estimate')->group(function () {
         Route::post('import', [ImportController::class, 'estimates']);
     });
+
+    // Employee
+    Route::prefix('/estimate')->group(function () {
+        Route::post('import', [ImportController::class, 'employees']);
+    });
+
+
+    // Account
+    // Soft deletes by setting Active to 'false'
+    Route::prefix('/account')->group(function () {
+        Route::post('import', [ImportController::class, 'accounts']);
+    });
+
+    // Budget
+
+    // Class
+
+    // Creditcard payment
+
+    // Department
+
+    // Deposit
+
+    // Journal Entry
+
+    // Payment
+
+    // Purchase
+
+    // Purchase Order
+
+    // Recurring Transaction
+
+    // Vendor
 });

@@ -1,6 +1,6 @@
 <template>
-	<div class="loader" v-if="loader">
-		<div class="loader__item">Loading...</div>
+	<div class="loader-container" v-if="loader">
+		<div class="loader-container__loader"></div>
 	</div>
 </template>
 
@@ -17,4 +17,3 @@ export default defineComponent({
 	},
 });
 </script>
-
