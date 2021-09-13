@@ -1,0 +1,14 @@
+.paginator {
+	margin: $large 0;
+	justify-content: center;
+	display: flex;
+	grid-gap: $medium;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&--current_page {
+		color: $red;
+	}
+}

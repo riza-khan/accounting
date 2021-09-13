@@ -1,5 +1,3 @@
-@import "../globals/variables.scss";
-
 a {
 	text-decoration: none;
 	color: $blue;
@@ -9,10 +7,12 @@ a {
 
 	&:hover {
 		color: $red;
+	    border-bottom: solid 1px $red;
 	}
 }
 
 .router-link-exact-active {
 	@extend a;
 	color: $red;
+	border-bottom: solid 1px $red;
 }
