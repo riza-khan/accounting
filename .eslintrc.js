@@ -8,12 +8,13 @@ module.exports = {
 		"plugin:vue/essential",
 		"plugin:@typescript-eslint/recommended",
 	],
-	parser: "vue-eslint-parser",
 	parserOptions: {
 		ecmaVersion: 12,
-		parser: "@typescript-eslint/parser",
+		parser: ["@typescript-eslint/parser"],
 		sourceType: "module",
 	},
 	plugins: ["vue", "@typescript-eslint"],
-	rules: {},
+	rules: {
+		"vue/no-multiple-template-root": "off",
+	},
 };
