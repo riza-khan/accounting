@@ -22,7 +22,7 @@
 					v-model="tableHeaders"
 					:size="headers.length"
 					@change="setTableContents"
-                    class="multi-select"
+					class="multi-select"
 				>
 					<option
 						v-for="(header, index) in headers"
@@ -35,18 +35,16 @@
 			</div>
 
 			<div class="data-container__details">
-				<div>
-					<div class="actions" v-if="targetElements.length">
-						<button @click="deleteTargetElements">Delete</button>
-					</div>
-					<Paginator
-						:total="total"
-						:perPage="perPage"
-						:currentPage="currentPage"
-						@changeCurrentPage="updateCurrentPage"
-						@changePerPage="updatePerPage"
-					/>
+				<div class="actions" v-if="targetElements.length">
+					<button @click="deleteTargetElements">Delete</button>
 				</div>
+				<Paginator
+					:total="total"
+					:perPage="perPage"
+					:currentPage="currentPage"
+					@changeCurrentPage="updateCurrentPage"
+					@changePerPage="updatePerPage"
+				/>
 				<div
 					class="data-container__details--headers"
 					:style="tableStyle"
@@ -94,7 +92,7 @@ import { useStore } from "vuex";
 
 interface Obj {
 	id?: string;
-    header?: string
+	header?: string;
 }
 
 export default defineComponent({
@@ -130,7 +128,7 @@ export default defineComponent({
 		const setTableContents = () => {
 			tableContents.value = results.value.map((result: any) => {
 				const obj: Obj = {};
-				tableHeaders.value.forEach((header:any) => {
+				tableHeaders.value.forEach((header: any) => {
 					obj["id"] = result.Id;
 					obj[header] = result[header];
 				});
@@ -169,7 +167,7 @@ export default defineComponent({
 				targetElements.value.push(item.id);
 			} else {
 				targetElements.value = targetElements.value.filter(
-					(i:any) => i.id !== item.id
+					(i: any) => i.id !== item.id
 				);
 			}
 		};
@@ -190,7 +188,7 @@ export default defineComponent({
 					const data = response.data[category.value];
 					total.value = response.data.count;
 					headers.value = Object.keys(data[0])
-						.map((key:any) => {
+						.map((key: any) => {
 							if (typeof data[0][key] === "string") {
 								return key;
 							}

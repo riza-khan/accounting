@@ -1,12 +1,13 @@
 // Globals
-@use "./globals/variables";
-@use "./globals/body";
-@use "./globals/links";
-@use "./globals/table";
+@import "./globals/variables";
+@import "./globals/body";
+@import "./globals/links";
+@import "./globals/table";
 
 // Components
-@use "./components/button";
-@use "./components/navbar";
-@use "./components/loader";
-@use "./components/modal";
-@use "./components/uploader";
+@import "./components/button";
+@import "./components/navbar";
+@import "./components/loader";
+@import "./components/modal";
+@import "./components/paginator";
+@import "./components/uploader";

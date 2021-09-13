@@ -7,13 +7,15 @@
 			<option value="100">100</option>
 			<option value="1000">1000</option>
 		</select>
-		<div
-			v-for="page in numOfPages"
-			:key="page"
-			@click="emit('changeCurrentPage', page)"
-			:class="currentPage === page ? 'paginator--current_page' : ''"
-		>
-			{{ page }}
+		<div class="paginator__numbers">
+			<button
+				v-for="page in numOfPages"
+				:key="page"
+				@click="emit('changeCurrentPage', page)"
+				:class="currentPage === page ? 'paginator--current_page' : ''"
+			>
+				{{ page }}
+			</button>
 		</div>
 	</div>
 </template>
@@ -45,4 +47,3 @@ export default defineComponent({
 	},
 });
 </script>
-

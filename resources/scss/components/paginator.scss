@@ -11,4 +11,9 @@
 	&--current_page {
 		color: $red;
 	}
+
+    &__numbers {
+        display: flex;
+        grid-gap: $small;
+    }
 }

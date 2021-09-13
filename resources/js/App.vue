@@ -1,7 +1,7 @@
 <template>
-	<Loader />
-	<Modal />
-	<router-view />
+	<Loader></Loader>
+	<Modal></Modal>
+	<router-view></router-view>
 </template>
 
 <script lang="ts">
