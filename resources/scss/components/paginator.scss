@@ -1,19 +1,14 @@
-.paginator {
-	margin: $large 0;
-	justify-content: center;
+.flex {
 	display: flex;
 	grid-gap: $medium;
+}
 
-	&:hover {
-		cursor: pointer;
+.paginator {
+	@extend .flex;
+	margin: $large 0;
+	justify-content: center;
+
+	&__numbers {
+		@extend .flex;
 	}
-
-	&--current_page {
-		color: $red;
-	}
-
-    &__numbers {
-        display: flex;
-        grid-gap: $small;
-    }
 }

@@ -1,13 +1,16 @@
 button {
 	border: 0;
-	background: $red;
+	background: $white;
 	padding: $padding-sm;
-	color: $white;
+	color: $black;
+    border: solid 1px $black;
 	border-radius: $small;
 	transition: all 0.5s ease;
 
 	&:hover {
 		cursor: pointer;
+        background: $black;
+        color: $white;
 	}
 }
 
@@ -39,6 +42,7 @@ button {
 .btn-danger-sm {
 	@extend .btn-sm;
 	background: $red;
+    border: solid 1px $red;
 
 	&:hover {
 		background: $pink;
@@ -49,6 +53,7 @@ button {
 .btn-danger-lg {
 	@extend .btn-lg;
 	background: $red;
+    border: solid 1px $red;
 
 	&:hover {
 		background: $pink;

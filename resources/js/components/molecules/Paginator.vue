@@ -12,7 +12,7 @@
 				v-for="page in numOfPages"
 				:key="page"
 				@click="emit('changeCurrentPage', page)"
-				:class="currentPage === page ? 'paginator--current_page' : ''"
+				:class="currentPage === page ? 'btn-danger-sm' : 'btn-sm'"
 			>
 				{{ page }}
 			</button>
