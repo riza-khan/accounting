@@ -1,9 +1,11 @@
 // Globals
 @use "./globals/body";
 @use "./globals/links";
+@use "./globals/table";
 
 // Components
 @use "./components/button";
 @use "./components/navbar";
 @use "./components/loader";
 @use "./components/modal";
+@use "./components/uploader";

@@ -1,0 +1,18 @@
+.table {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	&__headers,
+	&__contents {
+		display: grid;
+		grid-gap: $medium;
+		grid-template-columns: repeat(2, minmax(200px, 1fr));
+	}
+
+	&__headers {
+		border-bottom: 1px solid $blue;
+		padding-bottom: $medium;
+		margin-bottom: $medium;
+	}
+}

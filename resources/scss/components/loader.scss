@@ -1,3 +1,5 @@
+@import "../globals/variables";
+
 .loader-container {
 	position: absolute;
 	top: 0;
@@ -7,7 +9,7 @@
 	height: 100%;
 	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 	border-radius: 5px;
-	background-color: rgba(255, 255, 255, 0.15);
+	background-color: rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(5px);
 	display: flex;
 
@@ -62,7 +64,7 @@
 		content: "";
 	}
 	&__loader:after {
-		background: #0dc5c1;
+		background: $green;
 		width: 75%;
 		height: 75%;
 		border-radius: 50%;
