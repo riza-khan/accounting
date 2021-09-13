@@ -58,5 +58,10 @@ class CategoriesTableSeeder extends Seeder
             'name' => 'Class',
             'description' => 'Add a Class'
         ]);
+
+        Category::create([
+            'name' => 'Employee',
+            'description' => 'Add a Employee'
+        ]);
     }
 }

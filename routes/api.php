@@ -56,4 +56,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/customer')->group(function () {
         Route::post('import', [ImportController::class, 'customers']);
     });
+
+    // Estimate
+    Route::prefix('/estimate')->group(function () {
+        Route::post('import', [ImportController::class, 'estimates']);
+    });
 });

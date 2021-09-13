@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Imports\BillImport;
 use App\Imports\InvoiceImport;
 use App\Imports\CustomerImport;
+use App\Imports\EmployeeImport;
+use App\Imports\EstimateImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +33,22 @@ class ImportController extends Controller
     {
         $file = $request->file('file')->store('import');
         Excel::import(new CustomerImport, $file);
+
+        return response('File successfully imported', 200);
+    }
+
+    public function employees(Request $request): Response
+    {
+        $file = $request->file('file')->store('import');
+        Excel::import(new EmployeeImport, $file);
+
+        return response('File successfully imported', 200);
+    }
+
+    public function estimates(Request $request): Response
+    {
+        $file = $request->file('file')->store('import');
+        Excel::import(new EstimateImport, $file);
 
         return response('File successfully imported', 200);
     }
