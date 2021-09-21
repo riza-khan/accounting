@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class QuickBooksAPIController extends Controller
 {
-
     public function getInfo()
     {
         $this->dataService()->setLogLocation("../../../storage/logs/quickbooks.log");
