@@ -34,11 +34,11 @@ export default createStore({
 	getters: {
 		getLoading: (state: State): boolean => state.loading,
 		getToken: (state: State): string => state.token,
-		getCompany: (state: State): State.company => state.company,
+		getCompany: (state: State): Company => state.company,
 		getCompanyName: (state: State): string => state.company.CompanyName,
-		getCategories: (state: State): State.categories => state.categories,
+		getCategories: (state: State): Category => state.categories,
 		getLoader: (state: State): boolean => state.loader,
-		getModalTargetObj: (state: State): State.modalTargetObj =>
+		getModalTargetObj: (state: State): ModalTargetObj =>
 			state.modalTargetObj,
 	},
 	mutations: {
