@@ -37,16 +37,5 @@ class BillImport extends Import implements WithBatchInserts, WithChunkReading, T
             $batch->AddEntity($newInvoice, $row[2], "create");
             $batch->Execute();
         }
-
-        /* return new Invoice([ */
-        /*     'date'           => $row[0], */
-        /*     'type'           => $row[1], */
-        /*     'invoice_number' => $row[2], */
-        /*     'contact'        => $row[3], */
-        /*     'description'    => $row[4], */
-        /*     'due_date'       => $row[5], */
-        /*     'amount'         => $row[6], */
-        /*     'last_modified'  => $row[7], */
-        /* ]); */
     }
 }
